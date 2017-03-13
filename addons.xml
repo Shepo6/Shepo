@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addons>
-<addon id="plugin.program.ShepoWizard" name="Shepo Wizard" version="0.1.7" provider-name="Shepo">
+<addon id="plugin.program.ShepoWizard" name="Shepo Wizard" version="0.1.8" provider-name="Shepo">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
   </requires>
