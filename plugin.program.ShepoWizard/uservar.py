@@ -103,12 +103,12 @@ REPOZIPURL     = 'https://raw.githubusercontent.com/Shepo6/Shepo/master/reposito
 # Enable Notification screen Yes or No
 ENABLE         = 'Yes'
 # Url to notification file
-NOTIFICATION   = ''
+NOTIFICATION   = 'https://archive.org/download/ShepoWizard/ShepoWizardNotification.txt'
 # Use either 'Text' or 'Image'
-HEADERTYPE     = ''
-HEADERMESSAGE  = ''
+HEADERTYPE     = 'Text'
+HEADERMESSAGE  = 'Message From The Shepo Wizard'
 # url to image if using Image 424x180
 HEADERIMAGE    = ''
 # Background for Notification Window
-BACKGROUND     = ''
+BACKGROUND     = 'https://archive.org/download/fanart_20160727_1808/extra%20images/NotificationBackground.jpg'
 #########################################################
