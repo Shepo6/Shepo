@@ -55,7 +55,7 @@ SPACER         = '='
 COLOR1         = 'red'
 COLOR2         = 'white'
 # Primary menu items   / %s is the menu item and is required
-THEME1         = '[COLOR '+COLOR1+'][B][I][COLOR '+COLOR2+'][/COLOR][/B][/COLOR] [COLOR '+COLOR2+']%s[/COLOR][/I]'
+THEME1         = '[COLOR '+COLOR1+'][B][I][COLOR '+COLOR2+']Aftermath[/COLOR][/B][/COLOR] [COLOR '+COLOR2+']%s[/COLOR][/I]'
 # Build Names          / %s is the menu item and is required
 THEME2         = '[COLOR '+COLOR2+']%s[/COLOR]'
 # Alternate items      / %s is the menu item and is required
@@ -69,7 +69,7 @@ THEME5         = '[COLOR '+COLOR1+']Current Theme:[/COLOR] [COLOR '+COLOR2+']%s[
 # Enable 'Contact' menu item 'Yes' hide or 'No' dont hide
 HIDECONTACT    = 'No'
 # You can add \n to do line breaks
-CONTACT        = '\r\n\r\n\r\nThank you for choosing Shepo Wizard.\r\n\r\nContact me on Twitter @Shepo06, on Facebook at Ares-Project page, Kodi Custom Builds page and Wookie Community.'
+CONTACT        = '\r\n\r\nThank you for choosing Shepo Wizard.\r\n\r\nContact me on Twitter @Shepo06, on Facebook at Ares-Project page, Kodi Custom Builds page and Wookie Community.'
 #Images used for the contact window.  http:// for default icon and fanart
 CONTACTICON    = os.path.join(ART, 'contacticon.png')
 CONTACTFANART  = os.path.join(ART, 'contactfanart.jpg')
@@ -106,7 +106,7 @@ ENABLE         = 'Yes'
 NOTIFICATION   = 'https://archive.org/download/ShepoWizard/ShepoWizardNotification.txt'
 # Use either 'Text' or 'Image'
 HEADERTYPE     = 'Text'
-HEADERMESSAGE  = 'Message From The Shepo Wizard'
+HEADERMESSAGE  = 'A Message From The Shepo Wizard'
 # url to image if using Image 424x180
 HEADERIMAGE    = ''
 # Background for Notification Window
