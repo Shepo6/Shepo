@@ -1,49 +1,7 @@
-v0.1.7a
--Mod   tweaked code to prevent 2nd startup
--Fixed bug where started with second char in notifications
--Fixed bug when only 1 build is avaliable and shows kodi version and save data twice
--Fixed bug in backup build
-
-v0.1.7
--Added First Run Save Data Window
--Added New Window for Viewing Log Files
--Added Custom window for TextBoxes
--Added Install build without force close
--Added Install method to Settings (Always Ask, Reload Profile, Force Close)
--Added 'Remove Advanced Settings' in menu's
--Added Keep Repo's, Keep Super Favorities and WhiteList
--Added Import and Export Save Data/WhiteList
--Added PVR plugin in whitelist will re-enable on startup after install
--Added Video Preview for builds
--Added Test Builds only appear in developer mode(any build with the word test in the name)
--Added Sections for APK, Addon Installer, Advanced Settings, and Youtube Videos
--Added Adult attribute to Themes List
--Added 3rd Party Wizard support
--Added More support for Kodi 17 and Addons27.db
--Added Exception for 'meta_cache' and 'archive_cache' in clear cache(watched items)
--Added Ability to change the icon and fanart for the contact window
--Added Scraper for SPMC and Kodi Apks.
--Added Convert text to 0.1.7 text files
--Added Fix for meta and forks when installed from build
--Added Convert to Special on Backup guiFix and Themes
--Added Reinstall addon to addoninstaller
--Added Kodi 18 to build menu
--Added Addon support to theme backups
--Mod   Redid how the remove addons worked.
--Mod   Working url check now tries 3 times before returning a bad url
--Mod   Clear packages on startup reduced to 3 minutes(down from 5)
--Mod   If skin is set to 50 default, it uses 55 on 'skin.estuary'
--Mod   Converted all custom windows except advanced settings to .xml files
--Mod   Convert to special on guifix and theme
--Mod   Tweaks to addon installer
--Fixed Bugs in downloader.py and save data.
--Fixed Bug in SmoothStreams Login Data
--Fixed Bug in Trakt, Debrid, Login - clear addon data
--Fixed Bug in removing old thumbnails
--Fixed Bug in Kodi 17 Builds showing Kodi 16 count
--Fixed Bug in Kodi 17 causing startup to run twice
--Fixed Bugs in Backup/Restore when using external and network locations
--Rem   Header and message font size in uservar.py
+Coming Soon: v0.1.7
+-Install build without killing kodi
+-Ability to install minor updates for builds
+-Speed Test
 
 v0.1.6
 -Added Auto Clean Up Fequency on Startup

@@ -37,7 +37,7 @@ ART            = os.path.join(PATH, 'resources', 'art')
 ICONBUILDS     = os.path.join(ART, 'icon.png')
 ICONMAINT      = os.path.join(ART, 'icon.png')
 ICONAPK        = os.path.join(ART, 'icon.png')
-ICONADDONS     = 'http://'
+ICONADDONS     = ''
 ICONYOUTUBE    = 'http://'
 ICONSAVE       = os.path.join(ART, 'icon.png')
 ICONTRAKT      = 'http://'
@@ -55,7 +55,7 @@ SPACER         = '='
 COLOR1         = 'red'
 COLOR2         = 'white'
 # Primary menu items   / %s is the menu item and is required
-THEME1         = '[COLOR '+COLOR1+'][B][I][COLOR '+COLOR2+'][/COLOR][/B][/COLOR] [COLOR '+COLOR2+']%s[/COLOR][/I]'
+THEME1         = '[COLOR '+COLOR1+'][B][I][/B][/COLOR] [COLOR '+COLOR2+']%s[/COLOR][/I]'
 # Build Names          / %s is the menu item and is required
 THEME2         = '[COLOR '+COLOR2+']%s[/COLOR]'
 # Alternate items      / %s is the menu item and is required
@@ -69,10 +69,7 @@ THEME5         = '[COLOR '+COLOR1+']Current Theme:[/COLOR] [COLOR '+COLOR2+']%s[
 # Enable 'Contact' menu item 'Yes' hide or 'No' dont hide
 HIDECONTACT    = 'No'
 # You can add \n to do line breaks
-CONTACT        = 'Thank you for choosing Shepo Wizard.\r\n\r\nContact me on Twitter @Shepo06, on Facebook at Ares-Project page, Kodi Custom Builds page and Wookie Community.'
-#Images used for the contact window.  http:// for default icon and fanart
-CONTACTICON    = 'http://'
-CONTACTFANART  = 'http://'
+CONTACT        = 'Thank you for choosing Shepo Wizard.\r\n\r\nContact me on Twitter @Shepo06, on Facebook at Ares-Project page, Kodi Custom Builds page &amp; Wookie Community.'
 #########################################################
 
 #########################################################
@@ -92,9 +89,9 @@ AUTOINSTALL    = 'Yes'
 # Addon ID for the repository
 REPOID         = 'repository.Shepo'
 # Url to Addons.xml file in your repo folder(this is so we can get the latest version)
-REPOADDONXML   = 'https://raw.githubusercontent.com/Shepo6/Shepo/master/repository.Shepo/addon.xml'
+REPOADDONXML   = 'https://github.com/Shepo6/Shepo/blob/master/repository.Shepo/addon.xml'
 # Url to folder zip is located in
-REPOZIPURL     = 'https://raw.githubusercontent.com/Shepo6/Shepo/master/repository.Shepo/'
+REPOZIPURL     = 'https://github.com/Shepo6/Shepo/tree/master/repository.Shepo'
 #########################################################
 
 #########################################################
@@ -106,9 +103,13 @@ ENABLE         = 'Yes'
 NOTIFICATION   = 'https://archive.org/download/ShepoWizard/ShepoWizardNotification.txt'
 # Use either 'Text' or 'Image'
 HEADERTYPE     = 'Text'
-HEADERMESSAGE  = 'Welcome To The Shepo Wizard'
+# Font size of header
+FONTHEADER     = 'Font14'
+HEADERMESSAGE  = 'A Message From The Shepo Wizard'
 # url to image if using Image 424x180
 HEADERIMAGE    = ''
+# Font for Notification Window
+FONTSETTINGS   = 'Font12'
 # Background for Notification Window
 BACKGROUND     = 'https://archive.org/download/fanart_20160727_1808/extra%20images/NotificationBackground.jpg'
 #########################################################
