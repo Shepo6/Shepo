@@ -17,7 +17,7 @@
 #  http://www.gnu.org/copyleft/gpl.html                                        #
 ################################################################################
 
-import xbmc, xbmcgui, urllib, sys, time, uservar
+import xbmcgui, urllib, sys, time, uservar
 import wizard as wiz
 
 ADDONTITLE     = uservar.ADDONTITLE
@@ -32,7 +32,12 @@ def download(url, dest, dp = None):
 		dp.create(ADDONTITLE ,"Downloading Content",' ', ' ')
 	dp.update(0)
 	start_time=time.time()
-	urllib.urlretrieve(url, dest, lambda nb, bs, fs: _pbhook(nb, bs, fs, dp, start_time))
+	try:
+		urllib.urlretrieve(url, dest, lambda nb, bs, fs: _pbhook(nb, bs, fs, dp, start_time))
+	except Exception, e:
+		wiz.log("ERROR Downloading(%s): %s" % (dest, str(e)), xbmc.LOGERROR)
+		wiz.LogNotify("[COLOR %s]%s[/COLOR]" % (COLOR1, ADDONTITLE), "[COLOR %s]Download Timed Out[/COLOR]" % COLOR2)
+		sys.exit()
 
 def _pbhook(numblocks, blocksize, filesize, dp, start_time):
 	try: 
