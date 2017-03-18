@@ -48,7 +48,7 @@ KEEPLOGIN      = wiz.getS('keeplogin')
 LOGINSAVE      = wiz.getS('loginlastsave')
 COLOR1         = uservar.COLOR1
 COLOR2         = uservar.COLOR2
-ORDER          = ['sportsaccess', 'communityportal', 'tvportal', 'sportsmania', 'sportsnationhdtv', 'ultimatemania', 'otttv', 'dexter', 'reboot', 'ivue', 'ontapptv', 'vpnicity', 'overlordtv', 'xtreamcodes']
+ORDER          = ['sportsaccess', 'smoothstreams', 'communityportal', 'tvportal', 'flawless', 'sportsmania', 'sportsnationhdtv', 'ultimatemania', 'otttv', 'ivue', 'ontapptv', 'vpnicity', 'overlordtv', 'xtreamcodes']
 
 LOGINID = { 
 	'sportsaccess': {
@@ -59,10 +59,22 @@ LOGINID = {
 		'icon'     : os.path.join(ADDONS, 'plugin.video.sportsaccess', 'icon.png'),
 		'fanart'   : os.path.join(ADDONS, 'plugin.video.sportsaccess', 'fanart.jpg'),
 		'file'     : os.path.join(LOGINFOLD, 'sportsaccess_login'),
-		'settings' : os.path.join(ADDONS, 'plugin.video.sportsaccess', 'settings.xml'),
+		'settings' : os.path.join(ADDOND, 'plugin.video.sportsaccess', 'settings.xml'),
 		'default'  : 'skyusername',
 		'data'     : ['skyusername', 'skypassword'],
 		'activate' : 'RunPlugin(plugin://plugin.video.sportsaccess/?mode=259)'},
+	'smoothstreams': {
+		'name'     : 'Smooth Streams',
+		'plugin'   : 'script.smoothstreams',
+		'saved'    : 'loginsmoothstreams',
+		'path'     : os.path.join(ADDONS, 'script.smoothstreams'),
+		'icon'     : os.path.join(ADDONS, 'script.smoothstreams', 'icon.png'),
+		'fanart'   : os.path.join(ADDONS, 'script.smoothstreams', 'fanart.jpg'),
+		'file'     : os.path.join(LOGINFOLD, 'smoothstreams_login'),
+		'settings' : os.path.join(ADDOND, 'script.smoothstreams', 'settings.xml'),
+		'default'  : 'username',
+		'data'     : ['service', 'username', 'user_password'],
+		'activate' : ''},
 	'communityportal': {
 		'name'     : 'Community Portal',
 		'plugin'   : 'plugin.program.totalinstaller',
@@ -71,7 +83,7 @@ LOGINID = {
 		'icon'     : os.path.join(ADDONS, 'plugin.program.totalinstaller', 'icon.png'),
 		'fanart'   : os.path.join(ADDONS, 'plugin.program.totalinstaller', 'fanart.jpg'),
 		'file'     : os.path.join(LOGINFOLD, 'totalinstaller_login'),
-		'settings' : os.path.join(ADDONS, 'plugin.program.totalinstaller', 'settings.xml'),
+		'settings' : os.path.join(ADDOND, 'plugin.program.totalinstaller', 'settings.xml'),
 		'default'  : 'username',
 		'data'     : ['login', 'username', 'password'],
 		'activate' : ''},
@@ -83,9 +95,21 @@ LOGINID = {
 		'icon'     : os.path.join(ADDONS, 'script.tvportal', 'icon.png'),
 		'fanart'   : os.path.join(ADDONS, 'script.tvportal', 'fanart.jpg'),
 		'file'     : os.path.join(LOGINFOLD, 'tvportal_login'),
-		'settings' : os.path.join(ADDONS, 'script.tvportal', 'settings.xml'),
+		'settings' : os.path.join(ADDOND, 'script.tvportal', 'settings.xml'),
 		'default'  : 'username',
 		'data'     : ['login', 'username', 'password'],
+		'activate' : ''},
+	'flawless': {
+		'name'     : 'Flawless IPTV',
+		'plugin'   : 'plugin.video.FlawlessTv',
+		'saved'    : 'loginflawless',
+		'path'     : os.path.join(ADDONS, 'plugin.video.FlawlessTv'),
+		'icon'     : os.path.join(ADDONS, 'plugin.video.FlawlessTv', 'icon.png'),
+		'fanart'   : os.path.join(ADDONS, 'plugin.video.FlawlessTv', 'fanart.jpg'),
+		'file'     : os.path.join(LOGINFOLD, 'flawless_login'),
+		'settings' : os.path.join(ADDOND, 'plugin.video.FlawlessTv', 'settings.xml'),
+		'default'  : 'Username',
+		'data'     : ['Username', 'Password'],
 		'activate' : ''},
 	'sportsmania': {
 		'name'     : 'Sports Mania',
@@ -95,7 +119,7 @@ LOGINID = {
 		'icon'     : os.path.join(ADDONS, 'plugin.video.sportsmania', 'icon.png'),
 		'fanart'   : os.path.join(ADDONS, 'plugin.video.sportsmania', 'fanart.jpg'),
 		'file'     : os.path.join(LOGINFOLD, 'sportsmania_login'),
-		'settings' : os.path.join(ADDONS, 'plugin.video.sportsmania', 'settings.xml'),
+		'settings' : os.path.join(ADDOND, 'plugin.video.sportsmania', 'settings.xml'),
 		'default'  : 'snusername',
 		'data'     : ['snusername', 'snpassword'],
 		'activate' : 'RunPlugin(plugin://plugin.video.sportsmania/?mode=202)'},
@@ -107,7 +131,7 @@ LOGINID = {
 		'icon'     : os.path.join(ADDONS, 'plugin.video.sportsnationhdtv', 'icon.png'),
 		'fanart'   : os.path.join(ADDONS, 'plugin.video.sportsnationhdtv', 'fanart.jpg'),
 		'file'     : os.path.join(LOGINFOLD, 'sportsnationhd_login'),
-		'settings' : os.path.join(ADDONS, 'plugin.video.sportsnationhdtv', 'settings.xml'),
+		'settings' : os.path.join(ADDOND, 'plugin.video.sportsnationhdtv', 'settings.xml'),
 		'default'  : 'snusername',
 		'data'     : ['snusername', 'snpassword'],
 		'activate' : 'RunPlugin(plugin://plugin.video.sportsnationhdtv/?mode=202)'},
@@ -119,7 +143,7 @@ LOGINID = {
 		'icon'     : os.path.join(ADDONS, 'plugin.video.ultimatemania', 'icon.png'),
 		'fanart'   : os.path.join(ADDONS, 'plugin.video.ultimatemania', 'fanart.jpg'),
 		'file'     : os.path.join(LOGINFOLD, 'sportsmania_login'),
-		'settings' : os.path.join(ADDONS, 'plugin.video.ultimatemania', 'settings.xml'),
+		'settings' : os.path.join(ADDOND, 'plugin.video.ultimatemania', 'settings.xml'),
 		'default'  : 'snusername',
 		'data'     : ['snusername', 'snpassword'],
 		'activate' : 'RunPlugin(plugin://plugin.video.ultimatemania/?mode=202)'},
@@ -131,33 +155,9 @@ LOGINID = {
 		'icon'     : os.path.join(ADDONS, 'plugin.video.ottalpha', 'icon.png'),
 		'fanart'   : os.path.join(ADDONS, 'plugin.video.ottalpha', 'fanart.jpg'),
 		'file'     : os.path.join(LOGINFOLD, 'otttv_login'),
-		'settings' : os.path.join(ADDONS, 'plugin.video.ottalpha', 'settings.xml'),
+		'settings' : os.path.join(ADDOND, 'plugin.video.ottalpha', 'settings.xml'),
 		'default'  : 'Username',
 		'data'     : ['Username', 'Password'],
-		'activate' : ''},
-	'dexter': {
-		'name'     : 'Dexter',
-		'plugin'   : 'plugin.video.dex',
-		'saved'    : 'logindexter',
-		'path'     : os.path.join(ADDONS, 'plugin.video.dex'),
-		'icon'     : os.path.join(ADDONS, 'plugin.video.dex', 'icon.png'),
-		'fanart'   : os.path.join(ADDONS, 'plugin.video.dex', 'fanart.jpg'),
-		'file'     : os.path.join(LOGINFOLD, 'dexter_login'),
-		'settings' : os.path.join(ADDONS, 'plugin.video.dex', 'settings.xml'),
-		'default'  : 'kasutajanimi',
-		'data'     : ['kasutajanimi', 'salasona', 'pordinumber'],
-		'activate' : ''},
-	'reboot': {
-		'name'     : 'Reboot',
-		'plugin'   : 'plugin.video.reboot',
-		'saved'    : 'loginreboot',
-		'path'     : os.path.join(ADDONS, 'plugin.video.reboot'),
-		'icon'     : os.path.join(ADDONS, 'plugin.video.reboot', 'icon.png'),
-		'fanart'   : os.path.join(ADDONS, 'plugin.video.reboot', 'fanart.jpg'),
-		'file'     : os.path.join(LOGINFOLD, 'reboot_login'),
-		'settings' : os.path.join(ADDONS, 'plugin.video.reboot', 'settings.xml'),
-		'default'  : 'USER',
-		'data'     : ['username', 'password'],
 		'activate' : ''},
 	'ivue': {
 		'name'     : 'Ivue TV Guide',
@@ -167,7 +167,7 @@ LOGINID = {
 		'icon'     : os.path.join(ADDONS, 'script.ivueguide', 'icon.png'),
 		'fanart'   : os.path.join(ADDONS, 'script.ivueguide', 'fanart.jpg'),
 		'file'     : os.path.join(LOGINFOLD, 'ivue_login'),
-		'settings' : os.path.join(ADDONS, 'script.ivueguide', 'settings.xml'),
+		'settings' : os.path.join(ADDOND, 'script.ivueguide', 'settings.xml'),
 		'default'  : 'username',
 		'data'     : ['username', 'password'],
 		'activate' : ''},
@@ -179,7 +179,7 @@ LOGINID = {
 		'icon'     : os.path.join(ADDONS, 'script.tvguidedixie', 'icon.png'),
 		'fanart'   : os.path.join(ADDONS, 'script.tvguidedixie', 'fanart.jpg'),
 		'file'     : os.path.join(LOGINFOLD, 'ontapptv_login'),
-		'settings' : os.path.join(ADDONS, 'script.tvguidedixie', 'settings.xml'),
+		'settings' : os.path.join(ADDOND, 'script.tvguidedixie', 'settings.xml'),
 		'default'  : 'username',
 		'data'     : ['username', 'password'],
 		'activate' : ''},
@@ -191,7 +191,7 @@ LOGINID = {
 		'icon'     : os.path.join(ADDONS, 'plugin.program.vpnicity', 'icon.png'),
 		'fanart'   : os.path.join(ADDONS, 'plugin.program.vpnicity', 'fanart.jpg'),
 		'file'     : os.path.join(LOGINFOLD, 'vpnicity_login'),
-		'settings' : os.path.join(ADDONS, 'plugin.program.vpnicity', 'settings.xml'),
+		'settings' : os.path.join(ADDOND, 'plugin.program.vpnicity', 'settings.xml'),
 		'default'  : 'USER',
 		'data'     : ['USER', 'PASS'],
 		'activate' : ''},
@@ -203,7 +203,7 @@ LOGINID = {
 		'icon'     : os.path.join(ADDONS, 'plugin.video.overlordtv', 'icon.png'),
 		'fanart'   : os.path.join(ADDONS, 'plugin.video.overlordtv', 'fanart.jpg'),
 		'file'     : os.path.join(LOGINFOLD, 'overlordtv_login'),
-		'settings' : os.path.join(ADDONS, 'plugin.video.overlordtv', 'settings.xml'),
+		'settings' : os.path.join(ADDOND, 'plugin.video.overlordtv', 'settings.xml'),
 		'default'  : 'Username',
 		'data'     : ['Username', 'Password'],
 		'activate' : ''},
@@ -215,7 +215,7 @@ LOGINID = {
 		'icon'     : os.path.join(ADDONS, 'plugin.video.xtream-codes', 'icon.png'),
 		'fanart'   : os.path.join(ADDONS, 'plugin.video.xtream-codes', 'fanart.jpg'),
 		'file'     : os.path.join(LOGINFOLD, 'xtreamcodes_login'),
-		'settings' : os.path.join(ADDONS, 'plugin.video.xtream-codes', 'settings.xml'),
+		'settings' : os.path.join(ADDOND, 'plugin.video.xtream-codes', 'settings.xml'),
 		'default'  : 'kasutajanimi',
 		'data'     : ['kasutajanimi', 'salasona'],
 		'activate' : ''}
@@ -237,7 +237,14 @@ def loginIt(do, who):
 	if not os.path.exists(LOGINFOLD):  os.makedirs(LOGINFOLD)
 	if who == 'all':
 		for log in ORDER:
-			if os.path.exists(LOGINID[log]['path']): updateLogin(do, log)
+			if os.path.exists(LOGINID[log]['path']):
+				try:
+					addonid   = wiz.addonId(LOGINID[log]['plugin'])
+					default   = LOGINID[log]['default']
+					user      = addonid.getSetting(default)
+					if user == '' and do == 'update': continue
+					updateLogin(do, log)
+				except: pass
 			else: wiz.log('[Login Data] %s(%s) is not installed' % (LOGINID[log]['name'],LOGINID[log]['plugin']), xbmc.LOGERROR)
 		wiz.setS('loginlastsave', str(THREEDAYS))
 	else:
@@ -245,19 +252,19 @@ def loginIt(do, who):
 			if os.path.exists(LOGINID[who]['path']):
 				updateLogin(do, who)
 		else: wiz.log('[Login Data] Invalid Entry: %s' % who, xbmc.LOGERROR)
-		
-def clearSaved(who):
+
+def clearSaved(who, over=False):
 	if who == 'all':
 		for login in LOGINID:
-			file = LOGINID[login]['file']
-			if os.path.exists(file): os.remove(file)
-			wiz.LogNotify('[COLOR %s]%s[/COLOR]' % (COLOR1, LOGINID[login]['name']), '[COLOR %s]Login Data: Removed![/COLOR]' % COLOR2, 2000, LOGINID[login]['icon'])
+			clearSaved(login,  True)
 	elif LOGINID[who]:
 		file = LOGINID[who]['file']
-		if os.path.exists(file): os.remove(file)
-		wiz.LogNotify('[COLOR %s]%s[/COLOR]' % (COLOR1, LOGINID[who]['name']), '[COLOR %s]Login Data: Removed![/COLOR]' % COLOR2, 2000, LOGINID[who]['icon'])
-	wiz.refresh()
-		
+		if os.path.exists(file): 
+			os.remove(file)
+			wiz.LogNotify('[COLOR %s]%s[/COLOR]' % (COLOR1, LOGINID[who]['name']), '[COLOR %s]Login Data: Removed![/COLOR]' % COLOR2, 2000, LOGINID[who]['icon'])
+		wiz.setS(LOGINID[who]['saved'], '')
+	if over == False: wiz.refresh()
+
 def updateLogin(do, who):
 	file      = LOGINID[who]['file']
 	settings  = LOGINID[who]['settings']
@@ -272,37 +279,47 @@ def updateLogin(do, who):
 
 	if do == 'update':
 		if not user == '':
-			with open(file, 'w') as f:
-				for login in data: f.write('<login>\n\t<id>%s</id>\n\t<value>%s</value>\n</login>\n' % (login, addonid.getSetting(login)))
-			f.close()
-			user = addonid.getSetting(default)
-			wiz.setS(saved, user)
-			wiz.LogNotify("[COLOR %s]%s[/COLOR]" % (COLOR1, name),'[COLOR %s]Login Data: Saved![/COLOR]' % COLOR2, 2000, icon)
-		else: wiz.LogNotify("[COLOR %s]%s[/COLOR]" % (COLOR1, name),'[COLOR %s]login Data: Not Registered![/COLOR]' % COLOR2, 2000, icon)
+			try:
+				with open(file, 'w') as f:
+					for login in data:
+						f.write('<login>\n\t<id>%s</id>\n\t<value>%s</value>\n</login>\n' % (login, addonid.getSetting(login)))
+					f.close()
+				user = addonid.getSetting(default)
+				wiz.setS(saved, user)
+				wiz.LogNotify("[COLOR %s]%s[/COLOR]" % (COLOR1, name),'[COLOR %s]Login Data: Saved![/COLOR]' % COLOR2, 2000, icon)
+			except Exception, e:
+				wiz.log("[Login Data] Unable to Update %s (%s)" % (who, str(e)), xbmc.LOGERROR)
+		else: wiz.LogNotify("[COLOR %s]%s[/COLOR]" % (COLOR1, name),'[COLOR %s]Login Data: Not Registered![/COLOR]' % COLOR2, 2000, icon)
 	elif do == 'restore':
 		if os.path.exists(file):
 			f = open(file,mode='r'); g = f.read().replace('\n','').replace('\r','').replace('\t',''); f.close();
 			match = re.compile('<login><id>(.+?)</id><value>(.+?)</value></login>').findall(g)
-			if len(match) > 0:
-				for login, value in match:
-					addonid.setSetting(login, value)
-			user = addonid.getSetting(default)
-			wiz.setS(saved, user)
-			wiz.LogNotify("[COLOR %s]%s[/COLOR]" % (COLOR1, name), '[COLOR %s]Login: Restored![/COLOR]' % COLOR2, 2000, icon)
+			try:
+				if len(match) > 0:
+					for login, value in match:
+						addonid.setSetting(login, value)
+				user = addonid.getSetting(default)
+				wiz.setS(saved, user)
+				wiz.LogNotify("[COLOR %s]%s[/COLOR]" % (COLOR1, name), '[COLOR %s]Login: Restored![/COLOR]' % COLOR2, 2000, icon)
+			except Exception, e:
+				wiz.log("[Login Data] Unable to Restore %s (%s)" % (who, str(e)), xbmc.LOGERROR)
 		#else: wiz.LogNotify(name,'login Data: [COLOR red]Not Found![/COLOR]', 2000, icon)
 	elif do == 'clearaddon':
 		wiz.log('%s SETTINGS: %s' % (name, settings), xbmc.LOGDEBUG)
 		if os.path.exists(settings):
-			f = open(set,"r"); lines = f.readlines(); f.close()
-			f = open(settings,"w")
-			for line in lines:
-				match = re.compile('<setting.+?id="(.+?)".+?/>').findall(line)
-				if len(match) == 0: f.write(line)
-				elif match[0] not in data: f.write(line)
-				else: wiz.log('Removing Line: %s' % line, xbmc.LOGNOTICE)
-			f.close()
-			wiz.LogNotify("[COLOR %s]%s[/COLOR]" % (COLOR1, name), '[COLOR %s]Addon Data: Cleared![/COLOR]' % COLOR2, 2000, icon)
-		else: wiz.LogNotify("[COLOR %s]%s[/COLOR]" % (COLOR1, name), '[COLOR %s]Addon Data: Clear Failed![/COLOR]' % COLOR2, 2000, icon)
+			try:
+				f = open(settings, "r"); lines = f.readlines(); f.close()
+				f = open(settings, "w")
+				for line in lines:
+					match = wiz.parseDOM(line, 'setting', ret='id')
+					if len(match) == 0: f.write(line)
+					else:
+						if match[0] not in data: f.write(line)
+						else: wiz.log('Removing Line: %s' % line, xbmc.LOGNOTICE)
+				f.close()
+				wiz.LogNotify("[COLOR %s]%s[/COLOR]" % (COLOR1, name),'[COLOR %s]Addon Data: Cleared![/COLOR]' % COLOR2, 2000, icon)
+			except Exception, e:
+				wiz.log("[Trakt Data] Unable to Clear Addon %s (%s)" % (who, str(e)), xbmc.LOGERROR)
 	wiz.refresh()
 
 def autoUpdate(who):
@@ -316,11 +333,11 @@ def autoUpdate(who):
 			su = wiz.getS(LOGINID[who]['saved'])
 			n = LOGINID[who]['name']
 			if u == None or u == '': return
+			elif su == '': loginIt('update', who)
 			elif not u == su:
-				if DIALOG.yesno(ADDONTITLE, "[COLOR %s]Would you like to save the [COLOR %s]Login[/COLOR] data for [COLOR %s]%s[/COLOR]?" % (COLOR2, COLOR1, COLOR1, n), "Addon: [COLOR green][B]%s[/B][/COLOR]" % u, "Saved:[/COLOR] [COLOR red][B]%s[/B][/COLOR]" % su if not su == '' else 'Saved:[/COLOR] [COLOR red][B]None[/B][/COLOR]', yeslabel="[B]Save Data[/B]", nolabel="[B]No Cancel[/B]"):
+				if DIALOG.yesno(ADDONTITLE, "[COLOR %s]Would you like to save the [COLOR %s]Login[/COLOR] data for [COLOR %s]%s[/COLOR]?" % (COLOR2, COLOR1, COLOR1, n), "Addon: [COLOR green][B]%s[/B][/COLOR]" % u, "Saved:[/COLOR] [COLOR red][B]%s[/B][/COLOR]" % su if not su == '' else 'Saved:[/COLOR] [COLOR red][B]None[/B][/COLOR]', yeslabel="[B][COLOR green]Save Data[/COLOR][/B]", nolabel="[B][COLOR red]No Cancel[/COLOR][/B]"):
 					loginIt('update', who)
-			else:
-				loginIt('update', who)
+			else: loginIt('update', who)
 
 def importlist(who):
 	if who == 'all':
@@ -337,7 +354,7 @@ def importlist(who):
 			m  = re.compile('<login><id>%s</id><value>(.+?)</value></login>' % d).findall(g)
 			if len(m) > 0:
 				if not m[0] == su:
-					if DIALOG.yesno(ADDONTITLE, "[COLOR %s]Would you like to import the [COLOR %s]Login[/COLOR] data for [COLOR %s]%s[/COLOR]?" % (COLOR2, COLOR1, COLOR1, n), "File: [COLOR green][B]%s[/B][/COLOR]" % m[0], "Saved:[/COLOR] [COLOR red][B]%s[/B][/COLOR]" % su if not su == '' else 'Saved:[/COLOR] [COLOR red][B]None[/B][/COLOR]', yeslabel="[B]Save Data[/B]", nolabel="[B]No Cancel[/B]"):
+					if DIALOG.yesno(ADDONTITLE, "[COLOR %s]Would you like to import the [COLOR %s]Login[/COLOR] data for [COLOR %s]%s[/COLOR]?" % (COLOR2, COLOR1, COLOR1, n), "File: [COLOR green][B]%s[/B][/COLOR]" % m[0], "Saved:[/COLOR] [COLOR red][B]%s[/B][/COLOR]" % su if not su == '' else 'Saved:[/COLOR] [COLOR red][B]None[/B][/COLOR]', yeslabel="[B][COLOR green]Save Data[/COLOR][/B]", nolabel="[B][COLOR red]No Cancel[/COLOR][/B]"):
 						wiz.setS(sa, m[0])
 						wiz.log('[Import Data] %s: %s' % (who, str(m)), xbmc.LOGNOTICE)
 					else: wiz.log('[Import Data] Declined Import(%s): %s' % (who, str(m)), xbmc.LOGNOTICE)

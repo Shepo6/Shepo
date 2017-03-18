@@ -17,7 +17,7 @@
 #  http://www.gnu.org/copyleft/gpl.html                                        #
 ################################################################################
 
-import os, re, shutil, time, xbmc, wizard as wiz
+import os, re, shutil, time, xbmc, xbmcaddon, wizard as wiz
 try:
 	import json as simplejson 
 except:
@@ -49,11 +49,23 @@ def setNew(new, value):
 	return None
 
 def swapSkins(skin):
+	if skin == 'skin.confluence':
+		HOME     = xbmc.translatePath('special://home/')
+		skinfold = os.path.join(HOME, 'userdata', 'addon_data', 'skin.confluence')
+		settings = os.path.join(skinfold, 'settings.xml')
+		if not os.path.exists(settings):
+			string = '<settings>\n    <setting id="FirstTimeRun" type="bool">true</setting>\n</settings>'
+			os.makedirs(skinfold)
+			f = open(settings, 'w'); f.write(string); f.close()
+		else: xbmcaddon.Addon(id='skin.confluence').setSetting('FirstTimeRun', 'true')
 	old = 'lookandfeel.skin'
 	value = skin
 	current = getOld(old)
 	new = old
 	setNew(new, value)
+	#	if not xbmc.getCondVisibility(Skin.HasSetting(FirstTimeRun)):
+	#		while xbmc.getCondVisibility('Window.IsVisible(1112)'):
+	#			xbmc.executebuiltin('SendClick(100)')
 
 def swapUS():
 	new = '"addons.unknownsources"'

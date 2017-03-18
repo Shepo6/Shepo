@@ -186,10 +186,17 @@ def traktUser(who):
 
 def traktIt(do, who):
 	if not os.path.exists(ADDONDATA): os.makedirs(ADDONDATA)
-	if not os.path.exists(TRAKTFOLD):  os.makedirs(TRAKTFOLD)
+	if not os.path.exists(TRAKTFOLD): os.makedirs(TRAKTFOLD)
 	if who == 'all':
 		for log in ORDER:
-			if os.path.exists(TRAKTID[log]['path']): updateTrakt(do, log)
+			if os.path.exists(TRAKTID[log]['path']):
+				try:
+					addonid   = wiz.addonId(TRAKTID[log]['plugin'])
+					default   = TRAKTID[log]['default']
+					user      = addonid.getSetting(default)
+					if user == '' and do == 'update': continue
+					updateTrakt(do, log)
+				except: pass
 			else: wiz.log('[Trakt Data] %s(%s) is not installed' % (TRAKTID[log]['name'],TRAKTID[log]['plugin']), xbmc.LOGERROR)
 		wiz.setS('traktlastsave', str(THREEDAYS))
 	else:
@@ -198,18 +205,18 @@ def traktIt(do, who):
 				updateTrakt(do, who)
 		else: wiz.log('[Trakt Data] Invalid Entry: %s' % who, xbmc.LOGERROR)
 
-def clearSaved(who):
+def clearSaved(who, over=False):
 	if who == 'all':
 		for trakt in TRAKTID:
-			file = TRAKTID[trakt]['file']
-			if os.path.exists(file): os.remove(file)
-			wiz.LogNotify("[COLOR %s]%s[/COLOR]" % (COLOR1, TRAKTID[trakt]['name']),'[COLOR %s]Trakt Data: Removed![/COLOR]' % COLOR2, 2000, TRAKTID[trakt]['icon'])
+			clearSaved(trakt,  True)
 	elif TRAKTID[who]:
 		file = TRAKTID[who]['file']
-		if os.path.exists(file): os.remove(file)
-		wiz.LogNotify("[COLOR %s]%s[/COLOR]" % (COLOR1, TRAKTID[who]['name']),'[COLOR %s]Trakt Data: Removed![/COLOR]' % COLOR2, 2000, TRAKTID[who]['icon'])
-	wiz.refresh()
-		
+		if os.path.exists(file):
+			os.remove(file)
+			wiz.LogNotify("[COLOR %s]%s[/COLOR]" % (COLOR1, TRAKTID[who]['name']),'[COLOR %s]Trakt Data: Removed![/COLOR]' % COLOR2, 2000, TRAKTID[who]['icon'])
+		wiz.setS(TRAKTID[who]['saved'], '')
+	if over == False: wiz.refresh()
+
 def updateTrakt(do, who):
 	file      = TRAKTID[who]['file']
 	settings  = TRAKTID[who]['settings']
@@ -224,37 +231,47 @@ def updateTrakt(do, who):
 
 	if do == 'update':
 		if not user == '':
-			with open(file, 'w') as f:
-				for trakt in data: f.write('<trakt>\n\t<id>%s</id>\n\t<value>%s</value>\n</trakt>\n' % (trakt, addonid.getSetting(trakt)))
-			f.close()
-			user = addonid.getSetting(default)
-			wiz.setS(saved, user)
-			wiz.LogNotify("[COLOR %s]%s[/COLOR]" % (COLOR1, name), '[COLOR %s]Trakt Data: Saved![/COLOR]' % COLOR2, 2000, icon)
+			try:
+				with open(file, 'w') as f:
+					for trakt in data: 
+						f.write('<trakt>\n\t<id>%s</id>\n\t<value>%s</value>\n</trakt>\n' % (trakt, addonid.getSetting(trakt)))
+					f.close()
+				user = addonid.getSetting(default)
+				wiz.setS(saved, user)
+				wiz.LogNotify("[COLOR %s]%s[/COLOR]" % (COLOR1, name), '[COLOR %s]Trakt Data: Saved![/COLOR]' % COLOR2, 2000, icon)
+			except Exception, e:
+				wiz.log("[Trakt Data] Unable to Update %s (%s)" % (who, str(e)), xbmc.LOGERROR)
 		else: wiz.LogNotify("[COLOR %s]%s[/COLOR]" % (COLOR1, name), '[COLOR %s]Trakt Data: Not Registered![/COLOR]' % COLOR2, 2000, icon)
 	elif do == 'restore':
 		if os.path.exists(file):
 			f = open(file,mode='r'); g = f.read().replace('\n','').replace('\r','').replace('\t',''); f.close();
 			match = re.compile('<trakt><id>(.+?)</id><value>(.+?)</value></trakt>').findall(g)
-			if len(match) > 0:
-				for trakt, value in match:
-					addonid.setSetting(trakt, value)
-			user = addonid.getSetting(default)
-			wiz.setS(saved, user)
-			wiz.LogNotify("[COLOR %s]%s[/COLOR]" % (COLOR1, name), '[COLOR %s]Trakt: Restored![/COLOR]' % COLOR2, 2000, icon)
+			try:
+				if len(match) > 0:
+					for trakt, value in match:
+						addonid.setSetting(trakt, value)
+				user = addonid.getSetting(default)
+				wiz.setS(saved, user)
+				wiz.LogNotify("[COLOR %s]%s[/COLOR]" % (COLOR1, name), '[COLOR %s]Trakt: Restored![/COLOR]' % COLOR2, 2000, icon)
+			except Exception, e:
+				wiz.log("[Trakt Data] Unable to Restore %s (%s)" % (who, str(e)), xbmc.LOGERROR)
 		#else: wiz.LogNotify(name,'Trakt Data: [COLOR red]Not Found![/COLOR]', 2000, icon)
 	elif do == 'clearaddon':
 		wiz.log('%s SETTINGS: %s' % (name, settings), xbmc.LOGDEBUG)
 		if os.path.exists(settings):
-			f = open(set,"r"); lines = f.readlines(); f.close()
-			f = open(settings,"w")
-			for line in lines:
-				match = re.compile('<setting.+?id="(.+?)".+?/>').findall(line)
-				if len(match) == 0: f.write(line)
-				elif match[0] not in data: f.write(line)
-				else: wiz.log('Removing Line: %s' % line, xbmc.LOGNOTICE)
-			f.close()
-			wiz.LogNotify("[COLOR %s]%s[/COLOR]" % (COLOR1, name),'[COLOR %s]Addon Data: Cleared![/COLOR]' % COLOR2, 2000, icon)
-		else: wiz.LogNotify("[COLOR %s]%s[/COLOR]" % (COLOR1, name),'[COLOR %s]Addon Data: Clear Failed![/COLOR]' % COLOR2, 2000, icon)
+			try:
+				f = open(settings, "r"); lines = f.readlines(); f.close()
+				f = open(settings, "w")
+				for line in lines:
+					match = wiz.parseDOM(line, 'setting', ret='id')
+					if len(match) == 0: f.write(line)
+					else:
+						if match[0] not in data: f.write(line)
+						else: wiz.log('Removing Line: %s' % line, xbmc.LOGNOTICE)
+				f.close()
+				wiz.LogNotify("[COLOR %s]%s[/COLOR]" % (COLOR1, name),'[COLOR %s]Addon Data: Cleared![/COLOR]' % COLOR2, 2000, icon)
+			except Exception, e:
+				wiz.log("[Trakt Data] Unable to Clear Addon %s (%s)" % (who, str(e)), xbmc.LOGERROR)
 	wiz.refresh()
 
 def autoUpdate(who):
@@ -268,11 +285,11 @@ def autoUpdate(who):
 			su = wiz.getS(TRAKTID[who]['saved'])
 			n = TRAKTID[who]['name']
 			if u == None or u == '': return
+			elif su == '': traktIt('update', who)
 			elif not u == su:
-				if DIALOG.yesno(ADDONTITLE, "[COLOR %s]Would you like to save the [COLOR %s]Trakt[/COLOR] data for [COLOR %s]%s[/COLOR]?" % (COLOR2, COLOR1, COLOR1, n), "Addon: [COLOR green][B]%s[/B][/COLOR]" % u, "Saved:[/COLOR] [COLOR red][B]%s[/B][/COLOR]" % su if not su == '' else 'Saved:[/COLOR] [COLOR red][B]None[/B][/COLOR]', yeslabel="[B]Save Data[/B]", nolabel="[B]No Cancel[/B]"):
+				if DIALOG.yesno(ADDONTITLE, "[COLOR %s]Would you like to save the [COLOR %s]Trakt[/COLOR] data for [COLOR %s]%s[/COLOR]?" % (COLOR2, COLOR1, COLOR1, n), "Addon: [COLOR green][B]%s[/B][/COLOR]" % u, "Saved:[/COLOR] [COLOR red][B]%s[/B][/COLOR]" % su if not su == '' else 'Saved:[/COLOR] [COLOR red][B]None[/B][/COLOR]', yeslabel="[B][COLOR green]Save Data[/COLOR][/B]", nolabel="[B][COLOR red]No Cancel[/COLOR][/B]"):
 					traktIt('update', who)
-			else:
-				traktIt('update', who)
+			else: traktIt('update', who)
 
 def importlist(who):
 	if who == 'all':

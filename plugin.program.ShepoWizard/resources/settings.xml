@@ -8,10 +8,12 @@
 		<setting id="latestversion" type="text" label="Latest Version: " enable="false" default=""/>
 		<setting id="lastbuildcheck" type="text" label="Next check for build update: " enable="false" default=""/>
 		<setting id="disableupdate" type="bool" label="Disable Update Notification" default="false"/>
+		<setting id="installmethod" type="enum" label="Which method would you like to use after Install?" values="Always Ask|Reload Profile|Force Close" enable="!eq(-4,false)"/>
 		<setting type="lsep" label="Show Builds:"/>
 		<setting id="show15" type="bool" label="Show Isengard(v15.0) and Below Builds" default="true"/>
 		<setting id="show16" type="bool" label="Show Jarvis(v16.0) Builds" default="true"/>
 		<setting id="show17" type="bool" label="Show Krypton(v17.0) Builds" default="true"/>
+		<setting id="show18" type="bool" label="Show Leia(v18.0) Builds" default="true"/>
 		<setting id="seperate" type="bool" label="Do not seperate based off version" default="false"/>
 		<setting id="installed" type="bool" label="Build Installed" visible="false" default="false" />
 		<setting id="extract" type="text" label="Extract Build %" visible="false" default="100" />
@@ -19,15 +21,17 @@
 		<setting id="defaultskin" type="text" label="Default Skin: " enable="false" default="" visible="false"/>
 		<setting id="defaultskinname" type="text" label="Default Skin Name: " enable="false" default="" visible="false"/>
 		<setting id="defaultskinignore" type="bool" label="Ignore default skin check:" enable="false" default="false" visible="false"/>
-		<setting id="default.enablerssfeeds" type="text" label="Default lookandfeel.enablerssfeeds:" enable="false" default="false" visible="false"/>
-		<setting id="default.font" type="text" label="Default lookandfeel.font:" enable="false" default="false" visible="false"/>
-		<setting id="default.rssedit" type="text" label="Default lookandfeel.rssedit:" enable="false" default="false" visible="false"/>
-		<setting id="default.skincolors" type="text" label="Default lookandfeel.skincolors:" enable="false" default="false" visible="false"/>
-		<setting id="default.skintheme" type="text" label="Default lookandfeel.skintheme:" enable="false" default="false" visible="false"/>
-		<setting id="default.skinzoom" type="text" label="Default lookandfeel.skinzoom:" enable="false" default="false" visible="false"/>
-		<setting id="default.soundskin" type="text" label="Default lookandfeel.soundskin:" enable="false" default="false" visible="false"/>
-		<setting id="default.startupwindow" type="text" label="Default lookandfeel.startupwindow:" enable="false" default="false" visible="false"/>
-		<setting id="default.stereostrength" type="text" label="Default lookandfeel.stereostrength:" enable="false" default="false" visible="false"/>
+		<setting id="default.enablerssfeeds" type="text" label="Default lookandfeel.enablerssfeeds:" enable="false" default="" visible="false"/>
+		<setting id="default.font" type="text" label="Default lookandfeel.font:" enable="false" default="" visible="false"/>
+		<setting id="default.rssedit" type="text" label="Default lookandfeel.rssedit:" enable="false" default="" visible="false"/>
+		<setting id="default.skincolors" type="text" label="Default lookandfeel.skincolors:" enable="false" default="" visible="false"/>
+		<setting id="default.skintheme" type="text" label="Default lookandfeel.skintheme:" enable="false" default="" visible="false"/>
+		<setting id="default.skinzoom" type="text" label="Default lookandfeel.skinzoom:" enable="false" default="" visible="false"/>
+		<setting id="default.soundskin" type="text" label="Default lookandfeel.soundskin:" enable="false" default="" visible="false"/>
+		<setting id="default.startupwindow" type="text" label="Default lookandfeel.startupwindow:" enable="false" default="" visible="false"/>
+		<setting id="default.stereostrength" type="text" label="Default lookandfeel.stereostrength:" enable="false" default="" visible="false"/>
+		<setting id="default.addonupdate" type="text" label="Default general.addonupdate:" enable="false" default="" visible="false"/>
+		<setting id="pvrclient" type="text" label="Enabled PVR:" enable="false" default="" visible="false"/>
 	</category>
 
 	<category label="Maintenance">
@@ -66,10 +70,17 @@
 		<setting id="keepsources" type="bool" label="Keep My Sources" default="false"/>
 		<setting id="keepprofiles" type="bool" label="Keep My Profiles" default="false"/>
 		<setting id="keepadvanced" type="bool" label="Keep My AdvancedSettings.xml" default="false"/>
-		<setting type="lsep" label="Notification Window on Startup:"/>
-		<setting id="notify" type="bool" label="Disable Notification on Startup" />
-		<setting id="noteid" type="text" label="Latest Notification" visible="false" />
-		<setting id="notedismiss" type="bool" label="Dismiss or Remind me later" visible="false" />
+		<setting id="keeprepos" type="bool" label="Keep Installed Repositories" default="false"/>
+		<setting id="keepsuper" type="bool" label="Keep Super Favourites" default="false"/>
+		<setting id="keepwhitelist" type="bool" label="Keep My Whitelist Addons" default="false"/>
+		<setting type="lsep" label="Third Party Wizard Support:"/>
+		<setting id="enable3rd" type="bool" label="Enable 3rd Party Wizards" default="false"/>
+		<setting id="wizard1name" type="text" label="Wizard 1 Name: " enable="true" visible="!eq(-1,false)" default=""/>
+		<setting id="wizard1url" type="text" label="Wizard 1 URL: " enable="true" visible="!eq(-2,false)" default=""/>
+		<setting id="wizard2name" type="text" label="Wizard 2 Name: " enable="true" visible="!eq(-3,false)" default=""/>
+		<setting id="wizard2url" type="text" label="Wizard 2 URL: " enable="true" visible="!eq(-4,false)" default=""/>
+		<setting id="wizard3name" type="text" label="Wizard 3 Name: " enable="true" visible="!eq(-5,false)" default=""/>
+		<setting id="wizard3url" type="text" label="Wizard 3 URL: " enable="true" visible="!eq(-6,false)" default=""/>
 	</category>
 
 	<category label="Trakt Settings">
@@ -100,20 +111,23 @@
 	<category label="Login Settings">
 		<setting type="lsep" label="Save Login Data:"/>
 		<setting id="keeplogin" type="bool" label="Keep My Login Data" default="false"/>
+		<setting type="lsep" label="IPTV:"/>
 		<setting id="loginsportsaccess" type="text" label="SportsAccess: " enable="false" default=""/>
-		<setting id="logintotalinstaller" type="text" label="Community Portal: " enable="false" default=""/>
-		<setting id="logintvportal" type="text" label="TV Portal: " enable="false" default=""/>
+		<setting id="loginsmoothstreams" type="text" label="Smooth Streams: " enable="false" default=""/>
+		<setting id="loginflawless" type="text" label="Flawless IPTV: " enable="false" default=""/>
+		<setting id="loginotttv" type="text" label="Over The Top TV: " enable="false" default=""/>
 		<setting id="loginsportsmania" type="text" label="SportsMania: " enable="false" default=""/>
 		<setting id="loginsportsnationhd" type="text" label="SportsNationHD: " enable="false" default=""/>
 		<setting id="loginultimatemania" type="text" label="UltimateMania: " enable="false" default=""/>
-		<setting id="loginotttv" type="text" label="Over The Top TV: " enable="false" default=""/>
-		<setting id="logindexter" type="text" label="Dexter: " enable="false" default=""/>
-		<setting id="loginreboot" type="text" label="Reboot: " enable="false" default=""/>
-		<setting id="loginvpnicity" type="text" label="VPNicity: " enable="false" default=""/>
-		<setting id="loginivue" type="text" label="Ivue TV Guide: " enable="false" default=""/>
-		<setting id="loginontapptv" type="text" label="On-Tapp TV Guide: " enable="false" default=""/>
 		<setting id="loginoverlord" type="text" label="Overlord TV: " enable="false" default=""/>
 		<setting id="loginxtreamcodes" type="text" label="Xtream-Codes: " enable="false" default=""/>
+		<setting type="lsep" label="TV Guides:"/>
+		<setting id="logintvportal" type="text" label="TV Portal: " enable="false" default=""/>
+		<setting id="loginivue" type="text" label="Ivue TV Guide: " enable="false" default=""/>
+		<setting id="loginontapptv" type="text" label="On-Tapp TV Guide: " enable="false" default=""/>
+		<setting type="lsep" label="Misc Addons:"/>
+		<setting id="logintotalinstaller" type="text" label="Community Portal: " enable="false" default=""/>
+		<setting id="loginvpnicity" type="text" label="VPNicity: " enable="false" default=""/>
 		<setting id="loginlastsave" type="text" label="Last Time Login Saved: " enable="false" default=""/>
 	</category>
 
@@ -122,6 +136,10 @@
 		<setting id="adult" type="bool" label="Show Adult Addons: " enable="true" default="false"/>
 		<setting id="auto-view" type="bool" label="Enable Auto View" default="true"/>
 		<setting id="viewType" type="number" label="View Type" default="50" enable="!eq(-1,false)"/>
+		<setting type="lsep" label="Notification Window on Startup:"/>
+		<setting id="notify" type="bool" label="Disable Notification on Startup" />
+		<setting id="noteid" type="text" label="Latest Notification" visible="false" />
+		<setting id="notedismiss" type="bool" label="Dismiss or Remind me later" visible="false" />
 	</category>
 
 	<category label="Logging Settings">

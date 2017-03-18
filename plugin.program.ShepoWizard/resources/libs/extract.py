@@ -32,8 +32,11 @@ KEEPFAVS       = wiz.getS('keepfavourites')
 KEEPSOURCES    = wiz.getS('keepsources')
 KEEPPROFILES   = wiz.getS('keepprofiles')
 KEEPADVANCED   = wiz.getS('keepadvanced')
+KEEPSUPER      = wiz.getS('keepsuper')
+KEEPREPOS      = wiz.getS('keeprepos')
+KEEPWHITELIST  = wiz.getS('keepwhitelist')
 KODIV          = float(xbmc.getInfoLabel("System.BuildVersion")[:4])
-LOGFILES       = ['xbmc.log', 'xbmc.old.log', 'kodi.log', 'kodi.old.log', 'spmc.log', 'spmc.old.log', 'tvmc.log', 'tvmc.old.log', 'Thumbs.db', '.DS_Store']
+LOGFILES       = ['xbmc.log', 'xbmc.old.log', 'kodi.log', 'kodi.old.log', 'spmc.log', 'spmc.old.log', 'tvmc.log', 'tvmc.old.log', 'Thumbs.db', '.gitignore', '.DS_Store']
 bad_files      = ['onechannelcache.db', 'saltscache.db', 'saltscache.db-shm', 'saltscache.db-wal', 'saltshd.lite.db', 'saltshd.lite.db-shm', 'saltshd.lite.db-wal', 'queue.db', 'commoncache.db', 'access.log', 'trakt.db', 'video_cache.db']
 
 def all(_in, _out, dp=None, ignore=None, title=None):
@@ -50,15 +53,22 @@ def allNoProgress(_in, _out, ignore):
 	return True
 
 def allWithProgress(_in, _out, dp, ignore, title):
-	count = 0; errors = 0; error = ''; update = 0; size = 0;
-	start_time = time.time()
+	count = 0; errors = 0; error = ''; update = 0; size = 0; excludes = []
 	try:
 		zin = zipfile.ZipFile(_in,  'r')
 	except Exception, e:
 		errors += 1; error += '%s\n' % e
 		wiz.log('Error Checking Zip: %s' % str(e), xbmc.LOGERROR)
 		return update, errors, error
-
+	
+	whitelist = wiz.whiteList('read')
+	for item in whitelist:
+		try: name, id, fold = item
+		except: pass
+		excludes.append(fold)
+		if fold.startswith('pvr'):
+			wiz.setS('pvrclient', id)
+	
 	nFiles = float(len(zin.namelist()))
 	zipsize = wiz.convertSize(sum([item.file_size for item in zin.infolist()]))
 
@@ -69,17 +79,20 @@ def allWithProgress(_in, _out, dp, ignore, title):
 		count += 1; prog = int(count / nFiles * 100); size += item.file_size
 		file = str(item.filename).split('/')
 		skip = False
-		line1  = '%s [COLOR %s][Errors:%s][/COLOR]' % (title, COLOR2, errors)
-		line2  = '[COLOR %s]%s[/COLOR]' % (COLOR1, item.filename)
-		line3  = '[COLOR %s]File:[/COLOR] [COLOR %s]%s/%s[/COLOR] ' % (COLOR2, COLOR1, count, int(nFiles))
-		line3 += '[COLOR %s]Size:[/COLOR] [COLOR %s]%s/%s[/COLOR]' % (COLOR2, COLOR1, wiz.convertSize(size), zipsize)
-		if file[-1] == 'sources.xml' and file[-2] == 'userdata' and KEEPSOURCES == 'true': skip = True
-		elif file[-1] == 'favourites.xml' and file[-2] == 'userdata' and KEEPFAVS == 'true': skip = True
-		elif file[-1] == 'profiles.xml' and file[-2] == 'userdata' and KEEPPROFILES == 'true': skip = True
-		elif file[-1] == 'advancedsettings.xml' and file[-2] == 'userdata' and KEEPADVANCED == 'true': skip = True
+		line1  = '%s [COLOR %s][B][Errors:%s][/B][/COLOR]' % (title, COLOR2, errors)
+		line2  = '[COLOR %s][B]File:[/B][/COLOR] [COLOR %s]%s/%s[/COLOR] ' % (COLOR2, COLOR1, count, int(nFiles))
+		line2 += '[COLOR %s][B]Size:[/B][/COLOR] [COLOR %s]%s/%s[/COLOR]' % (COLOR2, COLOR1, wiz.convertSize(size), zipsize)
+		line3  = '[COLOR %s]%s[/COLOR]' % (COLOR1, item.filename)
+		if item.filename == 'userdata/sources.xml' and KEEPSOURCES == 'true': skip = True
+		elif item.filename == 'userdata/favourites.xml' and KEEPFAVS == 'true': skip = True
+		elif item.filename == 'userdata/profiles.xml' and KEEPPROFILES == 'true': skip = True
+		elif item.filename == 'userdata/advancedsettings.xml' and KEEPADVANCED == 'true': skip = True
+		elif file[0] == 'addons' and file[1] in excludes: skip = True
+		elif file[0] == 'userdata' and file[1] == 'addon_data' and file[2] in excludes: skip = True
 		elif file[-1] in LOGFILES: skip = True
 		elif file[-1] in bad_files: skip = True
 		elif file[-1].endswith('.csv'): skip = True
+		elif not str(item.filename).find('plugin.program.super.favourites') == -1 and KEEPSUPER == 'true': skip = True
 		elif not str(item.filename).find(ADDON_ID) == -1 and ignore == None: skip = True
 		if skip == True: wiz.log("Skipping: %s" % item.filename, xbmc.LOGNOTICE)
 		else:

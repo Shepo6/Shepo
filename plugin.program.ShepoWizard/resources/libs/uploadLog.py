@@ -27,6 +27,7 @@
 import os
 import re
 import socket
+import pyqrcode
 from urllib import urlencode
 from urllib import FancyURLopener
 import urllib2
@@ -52,9 +53,33 @@ EXPIRATION       = 2592000
 REPLACES         = (('//.+?:.+?@', '//USER:PASSWORD@'),('<user>.+?</user>', '<user>USER</user>'),('<pass>.+?</pass>', '<pass>PASSWORD</pass>'),)
 HOME             = xbmc.translatePath('special://home/')
 LOG              = xbmc.translatePath('special://logpath/')
-WIZLOG           = os.path.join(HOME, 'userdata', 'addon_data', ADDON_ID, 'wizard.log')
+USERDATA         = os.path.join(HOME,      'userdata')
+ADDONDATA        = os.path.join(USERDATA,  'addon_data', ADDON_ID)
+WIZLOG           = os.path.join(ADDONDATA, 'wizard.log')
 
 socket.setdefaulttimeout(5)
+
+class QRCode(xbmcgui.WindowXMLDialog):
+	def __init__(self, *args, **kwargs):
+		self.image = kwargs["image"]
+		self.text = kwargs["text"]
+
+	def onInit(self):
+		self.imagecontrol = 501
+		self.textbox = 502
+		self.okbutton = 503
+		self.title = 504
+		self.showdialog()
+
+	def showdialog(self):
+		self.getControl(self.imagecontrol).setImage(self.image)
+		self.getControl(self.textbox).setText(self.text)
+		self.getControl(self.title).setLabel(ADDONTITLE)
+		self.setFocus(self.getControl(self.okbutton))
+
+	def onClick(self, controlId):
+		if (controlId == self.okbutton):
+			self.close()
 
 # Custom urlopener to set user-agent
 class pasteURLopener(FancyURLopener):
@@ -85,14 +110,14 @@ class Main:
 				content = self.cleanLog(data)
 				succes, result = self.postLog(content, name)
 				if succes:
-					msg = "Post this url for your [COLOR %s]%s[/COLOR]:[CR][COLOR %s]%s[/COLOR]" % (COLOR1, name, COLOR1, result)
+					msg = "Post this url or scan QRcode for your [COLOR %s]%s[/COLOR], together with a description of the problem:[CR][COLOR %s]%s[/COLOR]" % (COLOR1, name, COLOR1, result)
 					if len(self.email) > 5: 
 						em_result, em_msg = self.email_Log(self.email, result, name)
 						if em_result == 'message':
 							msg += "[CR]%s" % em_msg
 						else:
 							msg += "[CR]Email ERROR: %s" % em_msg
-					self.showResult(msg)
+					self.showResult(msg, result)
 				else:
 					self.showResult('%s[CR]%s' % (error, result))
 			else:
@@ -218,8 +243,26 @@ class Main:
 			wiz.log("ERROR: "+ str(e), xbmc.LOGERROR)
 		return "Error Sending Email."
 
-	def showResult(self, message):
-		confirm = DIALOG.ok(ADDONTITLE, "[COLOR %s]%s[/COLOR]" % (COLOR2, message))
+	def showResult(self, message, url=None):
+		if not url == None:
+			try:
+				fn        = url.split('/')[-2]
+				imagefile = wiz.generateQR(url, fn)
+				#imagefile = os.path.join(QRCODES,'%s.png' % fn)
+ 				#qrIMG     = pyqrcode.create(url)
+				#qrIMG.png(imagefile, scale=10)
+				qr = QRCode( "loguploader.xml" , ADDON.getAddonInfo('path'), 'DefaultSkin', image=imagefile, text=message)
+				qr.doModal()
+				del qr
+				try:
+					os.remove(imagefile)
+				except: 
+					pass
+			except Exception, e:
+				wiz.log(str(e), xbmc.LOGNOTICE)
+				confirm   = DIALOG.ok(ADDONTITLE, "[COLOR %s]%s[/COLOR]" % (COLOR2, message))
+		else:
+			confirm   = DIALOG.ok(ADDONTITLE, "[COLOR %s]%s[/COLOR]" % (COLOR2, message))
 
 if ( __name__ == '__main__' ):
 	Main()

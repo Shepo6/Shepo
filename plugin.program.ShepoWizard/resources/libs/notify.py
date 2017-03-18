@@ -39,9 +39,10 @@ USERDATA       = os.path.join(HOME,     'userdata')
 PLUGIN         = os.path.join(ADDONS,   ADDON_ID)
 PACKAGES       = os.path.join(ADDONS,   'packages')
 ADDONDATA      = os.path.join(USERDATA, 'addon_data', ADDON_ID)
-FANART         = os.path.join(ADDONPATH,   'notificationwithoutlogo.jpg')
+FANART         = os.path.join(ADDONPATH,   'fanart.jpg')
 ICON           = os.path.join(ADDONPATH,   'icon.png')
 ART            = os.path.join(ADDONPATH,   'resources', 'art')
+SKINFOLD       = os.path.join(ADDONPATH,   'resources', 'skins', 'DefaultSkin', 'media')
 ADVANCED       = os.path.join(USERDATA,  'advancedsettings.xml')
 NOTIFY         = wiz.getS('notify')
 NOTEID         = wiz.getS('noteid')
@@ -57,11 +58,9 @@ UPDATECHECK    = uservar.UPDATECHECK if str(uservar.UPDATECHECK).isdigit() else 
 NEXTCHECK      = TODAY + timedelta(days=UPDATECHECK)
 NOTIFICATION   = uservar.NOTIFICATION
 ENABLE         = uservar.ENABLE
-FONTSETTINGS   = uservar.FONTSETTINGS if not uservar.FONTSETTINGS == '' else "Font14"
-BACKGROUND     = uservar.BACKGROUND if not uservar.BACKGROUND == '' or not wiz.workingURL(uservar.BACKGROUND) else FANART
 HEADERTYPE     = uservar.HEADERTYPE if uservar.HEADERTYPE == 'Image' else 'Text'
 HEADERMESSAGE  = uservar.HEADERMESSAGE
-FONTHEADER     = uservar.FONTHEADER if not uservar.FONTHEADER == '' else "Font16"
+BACKGROUND     = uservar.BACKGROUND
 HEADERIMAGE    = uservar.HEADERIMAGE
 THEME1         = uservar.THEME1
 THEME2         = uservar.THEME2
@@ -70,11 +69,12 @@ THEME4         = uservar.THEME4
 THEME5         = uservar.THEME5
 COLOR1         = uservar.COLOR1
 COLOR2         = uservar.COLOR2
+CONTACTICON    = uservar.CONTACTICON if not uservar.CONTACTICON == 'http://' else ICON 
+CONTACTFANART  = uservar.CONTACTFANART if not uservar.CONTACTFANART == 'http://' else FANART
 
-############################
-###NOTIFICATIONS############
-####THANKS GUYS @ TVADDONS##
-######MODIFIED BY AFTERMATH#
+if BACKGROUND == '': BACKGROUND = FANART
+elif not wiz.workingURL(BACKGROUND): BACKGROUND = FANART
+
 ACTION_PREVIOUS_MENU 			=  10	## ESC action
 ACTION_NAV_BACK 				=  92	## Backspace action
 ACTION_MOVE_LEFT				=   1	## Left arrow key
@@ -90,412 +90,9 @@ ACTION_MOUSE_LEFT_CLICK 		= 100
 ACTION_MOUSE_LONG_CLICK 		= 108
 
 def artwork(file):
-	if   file == 'button': return os.path.join(ART, 'Button', 'button-focus_lightblue.png'), os.path.join(ART, 'Button', 'button-focus_grey.png')
-	elif file == 'radio' : return os.path.join(ART, 'RadioButton', 'MenuItemFO.png'), os.path.join(ART, 'RadioButton', 'MenuItemNF.png'), os.path.join(ART, 'RadioButton', 'radiobutton-focus.png'), os.path.join(ART, 'RadioButton', 'radiobutton-nofocus.png')
-	elif file == 'slider': return os.path.join(ART, 'Slider', 'osd_slider_nib.png'), os.path.join(ART, 'Slider', 'osd_slider_nibNF.png'), os.path.join(ART, 'Slider', 'slider1.png'), os.path.join(ART, 'Slider', 'slider1.png')
-
-def notification(msg='', resize=True, L=40, T=25, W=1200, H=664, TxtColor='0xFFFFFFFF', Font=FONTSETTINGS, BorderWidth=15):
-	class MyWindow(xbmcgui.WindowDialog):
-		scr={};
-		def __init__(self,msg='',L=0,T=0,W=1280,H=720,TxtColor='0xFFFFFFFF',Font='font14',BorderWidth=10):
-			image_path = os.path.join(ART, 'ContentPanel.png')
-			self.border = xbmcgui.ControlImage(L,T,W,H, image_path)
-			self.addControl(self.border); 
-			self.BG=xbmcgui.ControlImage(L+BorderWidth,T+BorderWidth,W-(BorderWidth*2),H-(BorderWidth*2), BACKGROUND, aspectRatio=0, colorDiffuse='0xFFFFFFFF')
-			self.addControl(self.BG)
-			#title
-			if HEADERTYPE == 'Image':
-				iLogoW=144; iLogoH=68
-				self.iLogo=xbmcgui.ControlImage((L+(W/2))-(iLogoW/2),T+10,iLogoW,iLogoH,HEADERIMAGE,aspectRatio=0)
-				self.addControl(self.iLogo)
-			else:
-				title = HEADERMESSAGE
-				times = int(float(FONTHEADER[-2:]))
-				temp = title.replace('[', '<').replace(']', '>')
-				temp = re.sub('<[^<]+?>', '', temp)
-				title_width = len(str(temp))*(times - 1)
-				title = THEME3 % title
-				self.title=xbmcgui.ControlTextBox(L+(W-title_width)/2,T+BorderWidth,title_width,30,font=FONTHEADER,textColor='0xFF1E90FF')
-				self.addControl(self.title)
-				self.title.setText(title)
-			#body
-			msg = THEME2 % msg
-			self.TxtMessage=xbmcgui.ControlTextBox(L+BorderWidth+10,T+30+BorderWidth,W-(BorderWidth*2)-20,H-(BorderWidth*2)-75,font=Font,textColor=TxtColor)
-			self.addControl(self.TxtMessage)
-			self.TxtMessage.setText(msg)
-			#buttons
-			
-			focus, nofocus = artwork('button')
-			w1      = int((W-(BorderWidth*5))/3); h1 = 35
-			t       = int(T+H-h1-(BorderWidth*1.5))
-			space   = int(L+(BorderWidth*1.5))
-			dismiss = int(space+w1+BorderWidth)
-			later   = int(dismiss+w1+BorderWidth)
-			
-			self.buttonDismiss=xbmcgui.ControlButton(dismiss,t,w1,h1,"Dismiss",textColor="0xFF000000",focusedColor="0xFF000000",alignment=2,focusTexture=focus,noFocusTexture=nofocus)
-			self.buttonRemindMe=xbmcgui.ControlButton(later,t,w1,h1,"Remind Me Later",textColor="0xFF000000",focusedColor="0xFF000000",alignment=2,focusTexture=focus,noFocusTexture=nofocus)
-			self.addControl(self.buttonDismiss); self.addControl(self.buttonRemindMe)
-			self.buttonRemindMe.controlLeft(self.buttonDismiss); self.buttonRemindMe.controlRight(self.buttonDismiss)
-			self.buttonDismiss.controlLeft(self.buttonRemindMe); self.buttonDismiss.controlRight(self.buttonRemindMe)
-			self.setFocus(self.buttonRemindMe);
-
-		def doRemindMeLater(self):
-			try:
-				wiz.setS("notedismiss","false")
-				wiz.log("[Notification] NotifyID %s Remind Me Later" % wiz.getS('noteid'), xbmc.LOGNOTICE)
-			except: pass
-			self.CloseWindow()
-
-		def doDismiss(self):
-			try:    
-				wiz.setS("notedismiss","true")
-				wiz.log("[Notification] NotifyID %s Dismissed" % wiz.getS('noteid'), xbmc.LOGNOTICE)
-			except: pass
-			self.CloseWindow()
-
-		def onAction(self,action):
-			try: F=self.getFocus()
-			except: F=False
-			if   action == ACTION_PREVIOUS_MENU: self.doRemindMeLater()
-			elif action == ACTION_NAV_BACK: self.doRemindMeLater()
-
-		def onControl(self,control):
-			if   control==self.buttonRemindMe: self.doRemindMeLater()
-			elif control== self.buttonDismiss: self.doDismiss()
-			else:
-				try:    self.setFocus(self.buttonRemindMe)
-				except: pass
-		
-		def CloseWindow(self): self.close()
-	if resize==False: maxW=1280; maxH=720; W=int(maxW/1.5); H=int(maxH/1.5); L=int((maxW-W)/2); T=int((maxH-H)/2); 
-	TempWindow=MyWindow(msg=msg,L=L,T=T,W=W,H=H,TxtColor=TxtColor,Font=Font,BorderWidth=BorderWidth)
-	TempWindow.doModal()
-	del TempWindow
-
-def testNotification(msg='', resize=True, L=40, T=25, W=1200, H=664, TxtColor='0xFFFFFFFF', Font=FONTSETTINGS, BorderWidth=15):
-	class MyWindow(xbmcgui.WindowDialog):
-		scr={};
-		def __init__(self,msg='',L=0,T=0,W=1280,H=720,TxtColor='0xFFFFFFFF',Font='font14',BorderWidth=10):
-			image_path = os.path.join(ART, 'ContentPanel.png')
-			self.border = xbmcgui.ControlImage(L,T,W,H, image_path)
-			self.addControl(self.border)
-			self.BG=xbmcgui.ControlImage(L+BorderWidth,T+BorderWidth,W-(BorderWidth*2),H-(BorderWidth*2), BACKGROUND, aspectRatio=0, colorDiffuse='0xFFFFFFFFF')
-			self.addControl(self.BG)
-			#title
-			if HEADERTYPE == 'Image':
-				iLogoW=144; iLogoH=68
-				self.iLogo=xbmcgui.ControlImage((L+(W/2))-(iLogoW/2),T+10,iLogoW,iLogoH,HEADERIMAGE,aspectRatio=0)
-				self.addControl(self.iLogo); 
-			else:
-				title = HEADERMESSAGE
-				times = int(float(FONTHEADER[-2:]))
-				temp = title.replace('[', '<').replace(']', '>')
-				temp = re.sub('<[^<]+?>', '', temp)
-				title_width = len(str(temp))*(times - 1)
-				title = THEME3 % title
-				self.title=xbmcgui.ControlTextBox(L+(W-title_width)/2,T+BorderWidth,title_width,30,font=FONTHEADER,textColor='0xFF1E90FF')
-				self.addControl(self.title)
-				self.title.setText(title)
-			#body
-			msg = THEME2 % msg
-			self.TxtMessage=xbmcgui.ControlTextBox(L+BorderWidth+10,T+30+BorderWidth,W-(BorderWidth*2)-20,H-(BorderWidth*2)-75,font=Font,textColor=TxtColor)
-			self.addControl(self.TxtMessage)
-			self.TxtMessage.setText(msg)
-			#buttons
-			focus, nofocus = artwork('button')
-			w1      = int((W-(BorderWidth*5))/3); h1 = 35
-			t       = int(T+H-h1-(BorderWidth*1.5))
-			space   = int(L+(BorderWidth*1.5))
-			dismiss = int(space+w1+BorderWidth)
-			later   = int(dismiss+w1+BorderWidth)
-			
-			self.buttonDismiss=xbmcgui.ControlButton(dismiss,t,w1,h1,"Dismiss",textColor="0xFF000000",focusedColor="0xFF000000",alignment=2,focusTexture=focus,noFocusTexture=nofocus)
-			self.buttonRemindMe=xbmcgui.ControlButton(later,t,w1,h1,"Remind Me Later",textColor="0xFF000000",focusedColor="0xFF000000",alignment=2,focusTexture=focus,noFocusTexture=nofocus)
-			self.addControl(self.buttonDismiss); self.addControl(self.buttonRemindMe)
-			self.buttonRemindMe.controlLeft(self.buttonDismiss); self.buttonRemindMe.controlRight(self.buttonDismiss)
-			self.buttonDismiss.controlLeft(self.buttonRemindMe); self.buttonDismiss.controlRight(self.buttonRemindMe)
-			self.setFocus(self.buttonRemindMe)
-
-		def doRemindMeLater(self):
-			wiz.log("[Test Notification] Remind Me Later", xbmc.LOGNOTICE)
-			self.CloseWindow()
-
-		def doDismiss(self):
-			wiz.log("[Test Notification] C", xbmc.LOGNOTICE)
-			self.CloseWindow()
-
-		def onAction(self,action):
-			try: F=self.getFocus()
-			except: F=False
-			if   action == ACTION_PREVIOUS_MENU: self.doRemindMeLater()
-			elif action == ACTION_NAV_BACK: self.doRemindMeLater()
-
-		def onControl(self,control):
-			if   control==self.buttonRemindMe: self.doRemindMeLater()
-			elif control== self.buttonDismiss: self.doDismiss()
-			else:
-				try:    self.setFocus(self.buttonRemindMe)
-				except: pass
-
-		def CloseWindow(self): self.close()
-	if resize==False: maxW=1280; maxH=720; W=int(maxW/1.5); H=int(maxH/1.5); L=int((maxW-W)/2); T=int((maxH-H)/2); 
-	TempWindow=MyWindow(msg=msg,L=L,T=T,W=W,H=H,TxtColor=TxtColor,Font=Font,BorderWidth=BorderWidth); 
-	TempWindow.doModal()
-	del TempWindow
-
-def updateWindow(TxtColor='0xFFFFFFFF', Font='font13', BorderWidth=10):
-	class MyWindow(xbmcgui.WindowDialog):
-		scr={};
-		def __init__(self,L=0,T=0,W=1280,H=720,TxtColor='0xFFFFFFFF',Font='font14',BorderWidth=10):
-			if BUILDNAME == "" or not wiz.checkBuild(BUILDNAME, 'version'):
-				bgArt   = FANART
-				icon    = ICON
-				build   = "Test Window"
-				version = '1.0'
-				latest  = '1.0'
-			else:
-				bgArt   = wiz.checkBuild(BUILDNAME, 'fanart')
-				icon    = wiz.checkBuild(BUILDNAME, 'icon')
-				build   = BUILDNAME
-				version = BUILDVERSION
-				latest  = wiz.checkBuild(BUILDNAME, 'version')
-			image_path = os.path.join(ART, 'ContentPanel.png')
-			self.border = xbmcgui.ControlImage(L,T,W,H, image_path)
-			self.addControl(self.border); 
-			self.BG=xbmcgui.ControlImage(L+BorderWidth, T+BorderWidth, W-(BorderWidth*2), H-(BorderWidth*2), bgArt, aspectRatio=0, colorDiffuse='0xFFFFFFFF')
-			self.addControl(self.BG)
-			#title
-			times = int(float(Font[-2:]))
-			title = ADDONTITLE
-			temp = title.replace('[', '<').replace(']', '>')
-			temp = re.sub('<[^<]+?>', '', temp)
-			title_width = len(str(temp))*(times - 1)
-			title   = THEME2 % title
-			self.title=xbmcgui.ControlTextBox(L+(W-title_width)/2,T+BorderWidth,title_width,30,font='font14',textColor='0xFF1E90FF')
-			self.addControl(self.title)
-			self.title.setText(title)
-			#update
-			if version < latest: msg = "Update avaliable for installed build:\n[COLOR %s]%s[/COLOR]\n\nYour Current Shepo Build Version v[COLOR %s]%s[/COLOR]\nLatest Shepo Build Version: v[COLOR %s]%s[/COLOR]\n\n[COLOR %s]*Recommened: Fresh install (Below)[/COLOR]" % (COLOR1, build, COLOR1, version, COLOR1, latest, COLOR1)
-			else: msg = "Running latest version of installed build:\n[COLOR %s]%s[/COLOR]\n\nYour Current Shepo Build Version: v[COLOR %s]%s[/COLOR]\nLatest Shepo Build Version: v[COLOR %s]%s[/COLOR]\n\n[COLOR %s]*Recommended: Fresh install (Below)[/COLOR]" % (COLOR1, build, COLOR1, version, COLOR1, latest, COLOR1)
-			msg = THEME2 % msg
-			self.update=xbmcgui.ControlTextBox(L+(BorderWidth*2),T+BorderWidth+30,W-150-(BorderWidth*3),H-(BorderWidth*2)-30,font=Font,textColor=TxtColor)
-			self.addControl(self.update)
-			self.update.setText(msg)
-			#icon
-			self.Icon=xbmcgui.ControlImage(L+W-(BorderWidth*2)-150, T+BorderWidth+35, 150, 150, icon, aspectRatio=0, colorDiffuse='0xAFFFFFFF')
-			self.addControl(self.Icon)
-			#buttons
-			focus, nofocus = artwork('button')
-			w1      = int((W-(BorderWidth*5))/3); h1 = 35
-			t       = int(T+H-h1-(BorderWidth*1.5))
-			fresh   = int(L+(BorderWidth*1.5))
-			normal  = int(fresh+w1+BorderWidth)
-			ignore  = int(normal+w1+BorderWidth)
-			
-			self.buttonFRESH=xbmcgui.ControlButton(fresh,t, w1,h1,"Fresh Install",textColor="0xFF000000",focusedColor="0xFF000000",alignment=2,focusTexture=focus,noFocusTexture=nofocus)
-			self.buttonNORMAL=xbmcgui.ControlButton(normal,t,w1,h1,"Normal Install",textColor="0xFF000000",focusedColor="0xFF000000",alignment=2,focusTexture=focus,noFocusTexture=nofocus)
-			self.buttonIGNORE=xbmcgui.ControlButton(ignore,t,w1,h1,"Ignore 3 days",textColor="0xFF000000",focusedColor="0xFF000000",alignment=2,focusTexture=focus,noFocusTexture=nofocus)
-			self.addControl(self.buttonFRESH); self.addControl(self.buttonNORMAL); self.addControl(self.buttonIGNORE)
-			self.buttonIGNORE.controlLeft(self.buttonNORMAL); self.buttonIGNORE.controlRight(self.buttonFRESH)
-			self.buttonNORMAL.controlLeft(self.buttonFRESH); self.buttonNORMAL.controlRight(self.buttonIGNORE)
-			self.buttonFRESH.controlLeft(self.buttonIGNORE); self.buttonFRESH.controlRight(self.buttonNORMAL)
-			self.setFocus(self.buttonFRESH)
-
-		def doFreshInstall(self):
-			wiz.log("[Check Updates] [Installed Version: %s] [Current Version: %s] [User Selected: Fresh Install build]" % (BUILDVERSION, LATESTVERSION), xbmc.LOGNOTICE)
-			wiz.log("[Check Updates] [Next Check: %s]" % str(NEXTCHECK), xbmc.LOGNOTICE)
-			wiz.setS('lastbuildcheck', str(NEXTCHECK))
-			self.CloseWindow()
-			url = 'plugin://%s/?mode=install&name=%s&url=fresh' % (ADDON_ID, urllib.quote_plus(BUILDNAME))
-			xbmc.executebuiltin('RunPlugin(%s)' % url)
-
-		def doNormalInstall(self):
-			wiz.log("[Check Updates] [Installed Version: %s] [Current Version: %s] [User Selected: Normal Install build]" % (BUILDVERSION, LATESTVERSION), xbmc.LOGNOTICE)
-			wiz.log("[Check Updates] [Next Check: %s]" % str(NEXTCHECK), xbmc.LOGNOTICE)
-			wiz.setS('lastbuildcheck', str(NEXTCHECK))
-			self.CloseWindow()
-			url = 'plugin://%s/?mode=install&name=%s&url=normal' % (ADDON_ID, urllib.quote_plus(BUILDNAME))
-			xbmc.executebuiltin('RunPlugin(%s)' % url)
-
-		def doIgnore(self):
-			wiz.log("[Check Updates] [Installed Version: %s] [Current Version: %s] [User Selected: Ignore 3 Days]" % (BUILDVERSION, LATESTVERSION), xbmc.LOGNOTICE)
-			wiz.log("[Check Updates] [Next Check: %s]" % str(THREEDAYS), xbmc.LOGNOTICE)
-			wiz.setS('lastbuildcheck', str(THREEDAYS))
-			self.CloseWindow()
-
-		def onAction(self,action):
-			try: F=self.getFocus()
-			except: F=False
-			if   action == ACTION_PREVIOUS_MENU: self.doIgnore()
-			elif action == ACTION_NAV_BACK: self.doIgnore()
-			elif action == ACTION_MOVE_LEFT and not F: self.setFocus(self.buttonIGNORE)
-			elif action == ACTION_MOVE_RIGHT and not F: self.setFocus(self.buttonIGNORE)
-
-		def onControl(self,control):
-			if   control==self.buttonIGNORE: self.doIgnore()
-			elif control==self.buttonNORMAL: self.doNormalInstall()
-			elif control==self.buttonFRESH:  self.doFreshInstall()
-			else:
-				try:    self.setFocus(self.buttonIGNORE); 
-				except: pass
-
-		def CloseWindow(self): self.close()
-
-	maxW=1280; maxH=720; W=int(700); H=int(350); L=int((maxW-W)/2); T=int((maxH-H)/2); 
-	TempWindow=MyWindow(L=L,T=T,W=W,H=H,TxtColor=TxtColor,Font=Font,BorderWidth=BorderWidth); 
-	TempWindow.doModal() 
-	del TempWindow
-
-def firstRun(msg='', TxtColor='0xFFFFFFFF', Font='font12', BorderWidth=10):
-	class MyWindow(xbmcgui.WindowDialog):
-		scr={};
-		def __init__(self,L=0,T=0,W=1280,H=720,TxtColor='0xFFFFFFFF',Font='font12',BorderWidth=10):
-			image_path = os.path.join(ART, 'ContentPanel.png')
-			self.border = xbmcgui.ControlImage(L,T,W,H, image_path)
-			self.addControl(self.border); 
-			self.BG=xbmcgui.ControlImage(L+BorderWidth,T+BorderWidth,W-(BorderWidth*2),H-(BorderWidth*2), FANART, aspectRatio=0, colorDiffuse='0xFFFFFFFF')
-			self.addControl(self.BG)
-			#title
-			title = ADDONTITLE
-			times = int(float(Font[-2:]))
-			temp = title.replace('[', '<').replace(']', '>')
-			temp = re.sub('<[^<]+?>', '', temp)
-			title_width = len(str(temp))*(times - 1)
-			title   = THEME3 % title
-			self.title=xbmcgui.ControlTextBox(L+(W-title_width)/2,T+BorderWidth,title_width,30,font='font14',textColor='0xFF1E90FF')
-			self.addControl(self.title)
-			self.title.setText(title)
-			#welcome message
-			msg   = "Currently no build installed from %s.\n\nSelect 'Build Menu' to install a Shepo Build or 'Ignore' to never see this message again.\n\n Thank you for choosing The %s." % (ADDONTITLE, ADDONTITLE)
-			msg   = THEME2 % msg
-			self.TxtMessage=xbmcgui.ControlTextBox(L+(BorderWidth*2),T+30+BorderWidth,W-(BorderWidth*4),H-(BorderWidth*2)-75,font=Font,textColor=TxtColor)
-			self.addControl(self.TxtMessage)
-			self.TxtMessage.setText(msg)
-			#buttons
-			focus, nofocus = artwork('button')
-			w1        = int((W-(BorderWidth*5))/3); h1 = 35
-			t         = int(T+H-h1-(BorderWidth*1.5))
-			save      = int(L+(BorderWidth*1.5))
-			buildmenu = int(save+w1+BorderWidth)
-			ignore    = int(buildmenu+w1+BorderWidth)
-			self.buttonSAVEMENU=xbmcgui.ControlButton(save,t,w1,h1,"Save Data Menu",textColor="0xFF000000",focusedColor="0xFF000000",alignment=2,focusTexture=focus,noFocusTexture=nofocus)
-			self.buttonBUILDMENU=xbmcgui.ControlButton(buildmenu,t,w1,h1,"Build Menu",textColor="0xFF000000",focusedColor="0xFF000000",alignment=2,focusTexture=focus,noFocusTexture=nofocus)
-			self.buttonIGNORE=xbmcgui.ControlButton(ignore,t,w1,h1,"Ignore",textColor="0xFF000000",focusedColor="0xFF000000",alignment=2,focusTexture=focus,noFocusTexture=nofocus)
-			self.addControl(self.buttonSAVEMENU); self.addControl(self.buttonBUILDMENU); self.addControl(self.buttonIGNORE)
-			self.buttonIGNORE.controlLeft(self.buttonBUILDMENU); self.buttonIGNORE.controlRight(self.buttonSAVEMENU)
-			self.buttonBUILDMENU.controlLeft(self.buttonSAVEMENU); self.buttonBUILDMENU.controlRight(self.buttonIGNORE)
-			self.buttonSAVEMENU.controlLeft(self.buttonIGNORE); self.buttonSAVEMENU.controlRight(self.buttonBUILDMENU)
-			self.setFocus(self.buttonIGNORE)
-
-		def doSaveMenu(self):
-			wiz.log("[Check Updates] [User Selected: Open Save Data Menu] [Next Check: %s]" % str(NEXTCHECK), xbmc.LOGNOTICE)
-			wiz.setS('lastbuildcheck', str(NEXTCHECK))
-			self.CloseWindow()
-			url = 'plugin://%s/?mode=savedata' % ADDON_ID
-			xbmc.executebuiltin('ActivateWindow(10025, "%s", return)' % url)
-
-		def doBuildMenu(self):
-			wiz.log("[Check Updates] [User Selected: Open Build Menu] [Next Check: %s]" % str(NEXTCHECK), xbmc.LOGNOTICE)
-			wiz.setS('lastbuildcheck', str(NEXTCHECK))
-			self.CloseWindow()
-			url = 'plugin://%s/?mode=builds' % ADDON_ID
-			xbmc.executebuiltin('ActivateWindow(10025, "%s", return)' % url)
-
-		def doIgnore(self):
-			wiz.log("[First Run] [User Selected: Ignore Build Menu] [Next Check: %s]" % str(NEXTCHECK), xbmc.LOGNOTICE)
-			wiz.setS('lastbuildcheck', str(NEXTCHECK))
-			self.CloseWindow()
-
-		def onAction(self,action):
-			try: F=self.getFocus()
-			except: F=False
-			if   action == ACTION_PREVIOUS_MENU: self.doIgnore()
-			elif action == ACTION_NAV_BACK: self.doIgnore()
-			elif action == ACTION_MOVE_LEFT and not F: self.setFocus(self.buttonBUILDMENU)
-			elif action == ACTION_MOVE_RIGHT and not F: self.setFocus(self.buttonIGNORE)
-
-		def onControl(self,control):
-			if   control==self.buttonIGNORE: self.doIgnore()
-			elif control==self.buttonBUILDMENU:  self.doBuildMenu()
-			elif control==self.buttonSAVEMENU:  self.doSaveMenu()
-			else:
-				try:    self.setFocus(self.buttonIGNORE); 
-				except: pass
-
-		def CloseWindow(self): self.close()
-
-	maxW=1280; maxH=720; W=int(700); H=int(300); L=int((maxW-W)/2); T=int((maxH-H)/2); 
-	TempWindow=MyWindow(L=L,T=T,W=W,H=H,TxtColor=TxtColor,Font=Font,BorderWidth=BorderWidth); 
-	TempWindow.doModal() 
-	del TempWindow
-
-def contact(msg='', TxtColor='0xFFFFFFFF', Font='font12', BorderWidth=10):
-	class MyWindow(xbmcgui.WindowDialog):
-		scr={};
-		def __init__(self,msg='',L=0,T=0,W=1280,H=720,TxtColor='0xFFFFFFFF',Font='font12',BorderWidth=10):
-			image_path = os.path.join(ART, 'ContentPanel.png')
-			self.border = xbmcgui.ControlImage(L,T,W,H, image_path)
-			self.addControl(self.border); 
-			self.BG=xbmcgui.ControlImage(L+BorderWidth,T+BorderWidth,W-(BorderWidth*2),H-(BorderWidth*2), FANART, aspectRatio=0, colorDiffuse='0xFFFFFFFF')
-			self.addControl(self.BG)
-			#title
-			title = ADDONTITLE
-			times = int(float(Font[-2:]))
-			temp = title.replace('[', '<').replace(']', '>')
-			temp = re.sub('<[^<]+?>', '', temp)
-			title_width = len(str(temp))*(times - 1)
-			title = THEME3 % title
-			self.title=xbmcgui.ControlTextBox(L+(W-title_width)/2,T+BorderWidth,title_width,30,font='font14',textColor='0xFF1E90FF')
-			self.addControl(self.title)
-			self.title.setText(title)
-			#icon
-			self.Icon=xbmcgui.ControlImage(L+(BorderWidth*2), T+BorderWidth+40, 150, 150, ICON, aspectRatio=0, colorDiffuse='0xAFFFFFFF')
-			self.addControl(self.Icon)
-			#welcome message
-			msg = THEME2 % msg
-			self.TxtMessage=xbmcgui.ControlTextBox(L+160+(BorderWidth*3),T+45,W-170-(BorderWidth*3),H-(BorderWidth*2)-50,font=Font,textColor=TxtColor)
-			self.addControl(self.TxtMessage)
-			self.TxtMessage.setText(msg)
-
-		def doExit(self):
-			self.CloseWindow()
-
-		def onAction(self,action):
-			try: F=self.getFocus()
-			except: F=False
-			if   action == ACTION_PREVIOUS_MENU: self.doExit()
-			elif action == ACTION_NAV_BACK: self.doExit()
-
-		def CloseWindow(self): self.close()
-
-	maxW=1280; maxH=720; W=int(700); H=int(250); L=int((maxW-W)/2); T=int((maxH-H)/2); 
-	TempWindow=MyWindow(msg=msg,L=L,T=T,W=W,H=H,TxtColor=TxtColor,Font=Font,BorderWidth=BorderWidth); 
-	TempWindow.doModal() 
-	del TempWindow
-
-def apkInstaller(apk):
-	class APKInstaller(xbmcgui.WindowXMLDialog):
-		def __init__(self,*args,**kwargs):
-			self.shut=kwargs['close_time']
-			xbmc.executebuiltin("Skin.Reset(AnimeWindowXMLDialogClose)")
-			xbmc.executebuiltin("Skin.SetBool(AnimeWindowXMLDialogClose)")
-
-		def onFocus(self,controlID): pass
-
-		def onClick(self,controlID): self.CloseWindow()
-
-		def onAction(self,action):
-			if action in [ACTION_PREVIOUS_MENU, ACTION_BACKSPACE, ACTION_NAV_BACK, ACTION_SELECT_ITEM, ACTION_MOUSE_LEFT_CLICK, ACTION_MOUSE_LONG_CLICK]: self.CloseWindow()
-
-		def CloseWindow(self):
-			xbmc.executebuiltin("Skin.Reset(AnimeWindowXMLDialogClose)")
-			xbmc.sleep(400)
-			self.close()
-	
-	xbmc.executebuiltin('Skin.SetString(apkinstaller, Thank you for Downloading using Shepo APK Installer, Now that %s has been downloaded[CR]Click install on the next window!)' % apk)
-	popup = APKInstaller('APK.xml', ADDON.getAddonInfo('path'), 'DefaultSkin', close_time=34)
-	popup.doModal()
-	del popup
+	if   file == 'button': return os.path.join(SKINFOLD, 'Button', 'button-focus_lightblue.png'), os.path.join(SKINFOLD, 'Button', 'button-focus_grey.png')
+	elif file == 'radio' : return os.path.join(SKINFOLD, 'RadioButton', 'MenuItemFO.png'), os.path.join(SKINFOLD, 'RadioButton', 'MenuItemNF.png'), os.path.join(SKINFOLD, 'RadioButton', 'radiobutton-focus.png'), os.path.join(SKINFOLD, 'RadioButton', 'radiobutton-nofocus.png')
+	elif file == 'slider': return os.path.join(SKINFOLD, 'Slider', 'osd_slider_nib.png'), os.path.join(SKINFOLD, 'Slider', 'osd_slider_nibNF.png'), os.path.join(SKINFOLD, 'Slider', 'slider1.png'), os.path.join(SKINFOLD, 'Slider', 'slider1.png')
 
 def autoConfig(msg='', TxtColor='0xFFFFFFFF', Font='font12', BorderWidth=10):
 	class MyWindow(xbmcgui.WindowDialog):
@@ -508,7 +105,7 @@ def autoConfig(msg='', TxtColor='0xFFFFFFFF', Font='font12', BorderWidth=10):
 			boxbg = os.path.join(ART, 'bgg2.png')
 			self.border = xbmcgui.ControlImage(L,T,W,H, image_path)
 			self.addControl(self.border); 
-			self.BG=xbmcgui.ControlImage(L+BorderWidth,T+BorderWidth,W-(BorderWidth*2),H-(BorderWidth*2), FANART, aspectRatio=0, colorDiffuse='0xFFFFFFFF')
+			self.BG=xbmcgui.ControlImage(L+BorderWidth,T+BorderWidth,W-(BorderWidth*2),H-(BorderWidth*2), FANART, aspectRatio=0, colorDiffuse='0x5FFFFFFF')
 			self.addControl(self.BG)
 			top = T+BorderWidth
 			leftside = L+BorderWidth
@@ -539,7 +136,8 @@ def autoConfig(msg='', TxtColor='0xFFFFFFFF', Font='font12', BorderWidth=10):
 			self.Support3=xbmcgui.ControlTextBox(leftside+int(BorderWidth*1.5), firstrow+30+BorderWidth, (W/2)-(BorderWidth*4), 150, font='font12', textColor=TxtColor)
 			self.addControl(self.Support3)
 			self.Support3.setText(msg3)
-			self.videoCacheSize=xbmcgui.ControlSlider(leftside+int(BorderWidth*1.5), firstrow+210,(W/2)-(BorderWidth*5),20, textureback=sliderfocus, texture=slidernibnofocus, texturefocus=slidernibfocus)
+			try: self.videoCacheSize=xbmcgui.ControlSlider(leftside+int(BorderWidth*1.5), firstrow+210,(W/2)-(BorderWidth*5),20, textureback=sliderfocus, texture=slidernibnofocus, texturefocus=slidernibfocus, orientation=xbmcgui.HORIZONTAL)
+			except: self.videoCacheSize=xbmcgui.ControlSlider(leftside+int(BorderWidth*1.5), firstrow+210,(W/2)-(BorderWidth*5),20, textureback=sliderfocus, texture=slidernibnofocus, texturefocus=slidernibfocus)
 			self.addControl(self.videoCacheSize)
 			self.videomin = 0; self.videomax = freeMemory if freeMemory < 2000 else 2000
 			self.recommendedVideo = recMemory if recMemory < 500 else 500; self.currentVideo = self.recommendedVideo
@@ -561,7 +159,8 @@ def autoConfig(msg='', TxtColor='0xFFFFFFFF', Font='font12', BorderWidth=10):
 			self.Support3=xbmcgui.ControlTextBox(rightside+int(BorderWidth*3.5), firstrow+30+BorderWidth, (W/2)-(BorderWidth*4), 150, font='font12', textColor=TxtColor)
 			self.addControl(self.Support3)
 			self.Support3.setText(msg3)
-			self.CURLTimeout=xbmcgui.ControlSlider(rightside+int(BorderWidth*3.5),firstrow+210,(W/2)-(BorderWidth*5),20, textureback=sliderfocus, texture=slidernibnofocus, texturefocus=slidernibfocus)
+			try: self.CURLTimeout=xbmcgui.ControlSlider(rightside+int(BorderWidth*3.5),firstrow+210,(W/2)-(BorderWidth*5),20, textureback=sliderfocus, texture=slidernibnofocus, texturefocus=slidernibfocus, orientation=xbmcgui.HORIZONTAL)
+			except: self.CURLTimeout=xbmcgui.ControlSlider(rightside+int(BorderWidth*3.5),firstrow+210,(W/2)-(BorderWidth*5),20, textureback=sliderfocus, texture=slidernibnofocus, texturefocus=slidernibfocus)
 			self.addControl(self.CURLTimeout)
 			self.curlmin = 0; self.curlmax = 20
 			self.recommendedCurl = 10; self.currentCurl = self.recommendedCurl
@@ -583,7 +182,8 @@ def autoConfig(msg='', TxtColor='0xFFFFFFFF', Font='font12', BorderWidth=10):
 			self.Support3=xbmcgui.ControlTextBox(leftside+int(BorderWidth*1.5), secondrow+30+BorderWidth, (W/2)-(BorderWidth*4), 150, font='font12', textColor=TxtColor)
 			self.addControl(self.Support3)
 			self.Support3.setText(msg3)
-			self.readBufferFactor=xbmcgui.ControlSlider(leftside+int(BorderWidth*1.5), secondrow+210,(W/2)-(BorderWidth*5),20, textureback=sliderfocus, texture=slidernibnofocus, texturefocus=slidernibfocus)
+			try: self.readBufferFactor=xbmcgui.ControlSlider(leftside+int(BorderWidth*1.5), secondrow+210,(W/2)-(BorderWidth*5),20, textureback=sliderfocus, texture=slidernibnofocus, texturefocus=slidernibfocus, orientation=xbmcgui.HORIZONTAL)
+			except: self.readBufferFactor=xbmcgui.ControlSlider(leftside+int(BorderWidth*1.5), secondrow+210,(W/2)-(BorderWidth*5),20, textureback=sliderfocus, texture=slidernibnofocus, texturefocus=slidernibfocus)
 			self.addControl(self.readBufferFactor)
 			self.readmin = 0; self.readmax = 10
 			self.recommendedRead = 5; self.currentRead = self.recommendedRead
@@ -669,7 +269,7 @@ def autoConfig(msg='', TxtColor='0xFFFFFFFF', Font='font12', BorderWidth=10):
 			elif self.Button2.isSelected(): buffermode = 2
 			elif self.Button3.isSelected(): buffermode = 3
 			if os.path.exists(ADVANCED):
-				choice = DIALOG.yesno(ADDONTITLE, "[COLOR %s]There is currently an active [COLOR %s]AdvancedSettings.xml[/COLOR], would you like to remove it and continue?[/COLOR]" % (COLOR2, COLOR1), yeslabel="[B]Remove Settings[/B]", nolabel="[B]Cancel Write[/B]")
+				choice = DIALOG.yesno(ADDONTITLE, "[COLOR %s]There is currently an active [COLOR %s]AdvancedSettings.xml[/COLOR], would you like to remove it and continue?[/COLOR]" % (COLOR2, COLOR1), yeslabel="[B][COLOR green]Remove Settings[/COLOR][/B]", nolabel="[B][COLOR red]Cancel Write[/COLOR][/B]")
 				if choice == 0: return
 				try: os.remove(ADVANCED)
 				except: f = open(ADVANCED, 'w'); f.close()
@@ -721,3 +321,278 @@ def autoConfig(msg='', TxtColor='0xFFFFFFFF', Font='font12', BorderWidth=10):
 	TempWindow=MyWindow(L=L,T=T,W=W,H=H,TxtColor=TxtColor,Font=Font,BorderWidth=BorderWidth); 
 	TempWindow.doModal() 
 	del TempWindow
+
+##########################
+### Converted to XML
+##########################
+
+def contact(msg=""):
+	class MyWindow(xbmcgui.WindowXMLDialog):
+		def __init__(self, *args, **kwargs):
+			self.title = THEME3 % kwargs["title"]
+			self.image = kwargs["image"]
+			self.fanart = kwargs["fanart"]
+			self.msg = THEME2 % kwargs["msg"]
+
+		def onInit(self):
+			self.fanartimage = 101
+			self.titlebox = 102
+			self.imagecontrol = 103
+			self.textbox = 104
+			self.scrollcontrol = 105
+			self.showdialog()
+
+		def showdialog(self):
+			self.getControl(self.imagecontrol).setImage(self.image)
+			self.getControl(self.fanartimage).setImage(self.fanart)
+			self.getControl(self.fanartimage).setColorDiffuse('9FFFFFFF')
+			self.getControl(self.textbox).setText(self.msg)
+			self.getControl(self.titlebox).setLabel(self.title)
+			self.setFocusId(self.scrollcontrol)
+			
+		def onAction(self,action):
+			if   action == ACTION_PREVIOUS_MENU: self.close()
+			elif action == ACTION_NAV_BACK: self.close()
+
+	cw = MyWindow( "Contact.xml" , ADDON.getAddonInfo('path'), 'DefaultSkin', title=ADDONTITLE, fanart=CONTACTFANART, image=CONTACTICON, msg=msg)
+	cw.doModal()
+	del cw
+
+def apkInstaller(apk):
+	class APKInstaller(xbmcgui.WindowXMLDialog):
+		def __init__(self,*args,**kwargs):
+			self.shut=kwargs['close_time']
+			xbmc.executebuiltin("Skin.Reset(AnimeWindowXMLDialogClose)")
+			xbmc.executebuiltin("Skin.SetBool(AnimeWindowXMLDialogClose)")
+
+		def onClick(self,controlID): self.CloseWindow()
+
+		def onAction(self,action):
+			if action in [ACTION_PREVIOUS_MENU, ACTION_BACKSPACE, ACTION_NAV_BACK, ACTION_SELECT_ITEM, ACTION_MOUSE_LEFT_CLICK, ACTION_MOUSE_LONG_CLICK]: self.CloseWindow()
+
+		def CloseWindow(self):
+			xbmc.executebuiltin("Skin.Reset(AnimeWindowXMLDialogClose)")
+			xbmc.sleep(400)
+			self.close()
+	
+	xbmc.executebuiltin('Skin.SetString(apkinstaller, Now that %s has been downloaded[CR]Click install on the next window!)' % apk)
+	popup = APKInstaller('APK.xml', ADDON.getAddonInfo('path'), 'DefaultSkin', close_time=34)
+	popup.doModal()
+	del popup
+
+def firstRunSettings():
+	class firstRun(xbmcgui.WindowXMLDialog):
+		def __init__(self,*args,**kwargs):
+			self.whitelistcurrent = kwargs['current']
+		
+		def onInit(self):
+			self.title      = 101
+			self.okbutton   = 201
+			self.trakt      = 301
+			self.debrid     = 302
+			self.login      = 303
+			self.sources    = 304
+			self.profiles   = 305
+			self.advanced   = 306
+			self.favourites = 307
+			self.superfav   = 308
+			self.repo       = 309
+			self.whitelist  = 310
+			self.cache      = 311
+			self.packages   = 312
+			self.thumbs     = 313
+			self.showdialog()
+			self.controllist     = [self.trakt, self.debrid, self.login, 
+									self.sources, self.profiles, self.advanced, 
+									self.favourites, self.superfav, self.repo, 
+									self.whitelist, self.cache, self.packages, self.thumbs]
+			self.controlsettings = ['keeptrakt', 'keepdebrid', 'keeplogin',
+									'keepsources', 'keepprofiles', 'keepadvanced',
+									'keepfavourites', 'keeprepos', 'keepsuper', 
+									'keepwhitelist', 'clearcache', 'clearpackages', 'clearthumbs']
+			for item in self.controllist:
+				if wiz.getS(self.controlsettings[self.controllist.index(item)]) == 'true':
+					self.getControl(item).setSelected(True)
+
+		def showdialog(self):
+			self.getControl(self.title).setLabel(ADDONTITLE)
+			self.setFocus(self.getControl(self.okbutton))
+			
+		def onClick(self, controlId):
+			if controlId == self.okbutton:
+				self.close()
+
+				for item in self.controllist:
+					at = self.controllist.index(item)
+					if self.getControl(item).isSelected(): wiz.setS(self.controlsettings[at], 'true')
+					else: wiz.setS(self.controlsettings[at], 'false')
+						
+				if self.getControl(self.whitelist).isSelected() and not self.whitelistcurrent == 'true':
+					wiz.whiteList('edit')
+
+	fr = firstRun( "FirstRunSaveData.xml" , ADDON.getAddonInfo('path'), 'DefaultSkin', current=wiz.getS('keepwhitelist'))
+	fr.doModal()
+	del fr
+
+def firstRun():
+	class MyWindow(xbmcgui.WindowXMLDialog):
+		def __init__(self, *args, **kwargs):
+			self.title = THEME3 % ADDONTITLE
+			self.msg   = "Currently no build installed from %s.\n\nSelect 'Build Menu' to install a Community Build from us or 'Ignore' to never see this message again.\n\nThank you for choosing %s." % (ADDONTITLE, ADDONTITLE)
+			self.msg   = THEME2 % self.msg
+
+		def onInit(self):
+			self.image     = 101
+			self.titlebox  = 102
+			self.textbox   = 103
+			self.buildmenu = 201
+			self.ignore    = 202
+			self.showdialog()
+
+		def showdialog(self):
+			self.getControl(self.image).setImage(FANART)
+			self.getControl(self.image).setColorDiffuse('9FFFFFFF')
+			self.getControl(self.textbox).setText(self.msg)
+			self.getControl(self.titlebox).setLabel(self.title)
+			self.setFocusId(self.buildmenu)
+		
+		def doBuildMenu(self):
+			wiz.log("[Check Updates] [User Selected: Open Build Menu] [Next Check: %s]" % str(NEXTCHECK), xbmc.LOGNOTICE)
+			wiz.setS('lastbuildcheck', str(NEXTCHECK))
+			self.close()
+			url = 'plugin://%s/?mode=builds' % ADDON_ID
+			xbmc.executebuiltin('ActivateWindow(10025, "%s", return)' % url)
+		
+		def doIgnore(self):
+			self.close()
+			wiz.log("[First Run] [User Selected: Ignore Build Menu] [Next Check: %s]" % str(NEXTCHECK), xbmc.LOGNOTICE)
+			wiz.setS('lastbuildcheck', str(NEXTCHECK))
+		
+		def onAction(self,action):
+			if   action == ACTION_PREVIOUS_MENU: self.doIgnore()
+			elif action == ACTION_NAV_BACK: self.doIgnore()
+
+		def onClick(self, controlId):
+			if (controlId == self.buildmenu): self.doBuildMenu()
+			else: self.doIgnore()
+	
+	fr = MyWindow( "FirstRunBuild.xml" , ADDON.getAddonInfo('path'), 'DefaultSkin')
+	fr.doModal()
+	del fr
+
+def notification(msg='', test=False):
+	class MyWindow(xbmcgui.WindowXMLDialog):
+		def __init__(self, *args, **kwargs):
+			self.test = kwargs['test']
+			self.message =  THEME2 % kwargs['msg']
+		
+		def onInit(self):
+			self.image       = 101
+			self.titlebox    = 102
+			self.titleimage  = 103
+			self.textbox     = 104
+			self.scroller    = 105
+			self.dismiss     = 201
+			self.remindme    = 202
+			self.showdialog()
+
+		def showdialog(self):
+			self.testimage = os.path.join(ART, 'text.png')
+			self.getControl(self.image).setImage(BACKGROUND)
+			self.getControl(self.image).setColorDiffuse('9FFFFFFF')
+			self.getControl(self.textbox).setText(self.message)
+			self.setFocusId(self.remindme)
+			if HEADERTYPE == 'Text':
+				self.getControl(self.titlebox).setLabel(THEME3 % HEADERMESSAGE)
+			else:
+				self.getControl(self.titleimage).setImage(HEADERIMAGE)
+
+		def doRemindMeLater(self):
+			if not test == True:
+				wiz.setS("notedismiss","false")
+			wiz.log("[Notification] NotifyID %s Remind Me Later" % wiz.getS('noteid'), xbmc.LOGNOTICE)
+			self.close()
+
+		def doDismiss(self):
+			if not test == True:
+				wiz.setS("notedismiss","true")
+			wiz.log("[Notification] NotifyID %s Dismissed" % wiz.getS('noteid'), xbmc.LOGNOTICE)
+			self.close()
+
+		def onAction(self,action):
+			if   action == ACTION_PREVIOUS_MENU: self.doRemindMeLater()
+			elif action == ACTION_NAV_BACK: self.doRemindMeLater()
+
+		def onClick(self, controlId):
+			if (controlId == self.dismiss): self.doDismiss()
+			else: self.doRemindMeLater()
+			
+	xbmc.executebuiltin('Skin.SetString(headertexttype, %s)' % 'true' if HEADERTYPE == 'Text' else 'false')
+	xbmc.executebuiltin('Skin.SetString(headerimagetype, %s)' % 'true' if HEADERTYPE == 'Image' else 'false')
+	notify = MyWindow( "Notifications.xml" , ADDON.getAddonInfo('path'), 'DefaultSkin', msg=msg, test=test)
+	notify.doModal()
+	del notify
+
+def updateWindow(name='Testing Window', current='1.0', new='1.1', icon=ICON, fanart=FANART):
+	class MyWindow(xbmcgui.WindowXMLDialog):
+		def __init__(self, *args, **kwargs):
+			self.name = THEME3 % kwargs['name']
+			self.current = kwargs['current']
+			self.new = kwargs['new']
+			self.icon = kwargs['icon']
+			self.fanart = kwargs['fanart']
+			self.msgupdate  = "Update avaliable for installed build:\n[COLOR %s]%s[/COLOR]\n\nCurrent Version: v[COLOR %s]%s[/COLOR]\nLatest Version: v[COLOR %s]%s[/COLOR]\n\n[COLOR %s]*Recommened: Fresh install[/COLOR]" % (COLOR1, self.name, COLOR1, self.current, COLOR1, self.new, COLOR1)
+			self.msgcurrent = "Running latest version of installed build:\n[COLOR %s]%s[/COLOR]\n\nCurrent Version: v[COLOR %s]%s[/COLOR]\nLatest Version: v[COLOR %s]%s[/COLOR]\n\n[COLOR %s]*Recommended: Fresh install[/COLOR]" % (COLOR1, self.name, COLOR1, self.current, COLOR1, self.new, COLOR1)
+		
+		def onInit(self):
+			self.imagefanart = 101
+			self.header      = 102
+			self.textbox     = 103
+			self.imageicon   = 104
+			self.fresh       = 201
+			self.normal      = 202
+			self.ignore      = 203
+			self.showdialog()
+
+		def showdialog(self):
+			self.getControl(self.header).setLabel(self.name)
+			self.getControl(self.textbox).setText(THEME2 % self.msgupdate if current < new else self.msgcurrent)
+			self.getControl(self.imagefanart).setImage(self.fanart)
+			self.getControl(self.imagefanart).setColorDiffuse('2FFFFFFF')
+			self.getControl(self.imageicon).setImage(self.icon)
+			self.setFocusId(self.fresh)
+
+		def doFreshInstall(self):
+			wiz.log("[Check Updates] [Installed Version: %s] [Current Version: %s] [User Selected: Fresh Install build]" % (BUILDVERSION, LATESTVERSION), xbmc.LOGNOTICE)
+			wiz.log("[Check Updates] [Next Check: %s]" % str(NEXTCHECK), xbmc.LOGNOTICE)
+			wiz.setS('lastbuildcheck', str(NEXTCHECK))
+			self.close()
+			url = 'plugin://%s/?mode=install&name=%s&url=fresh' % (ADDON_ID, urllib.quote_plus(BUILDNAME))
+			xbmc.executebuiltin('RunPlugin(%s)' % url)
+
+		def doNormalInstall(self):
+			wiz.log("[Check Updates] [Installed Version: %s] [Current Version: %s] [User Selected: Normal Install build]" % (BUILDVERSION, LATESTVERSION), xbmc.LOGNOTICE)
+			wiz.log("[Check Updates] [Next Check: %s]" % str(NEXTCHECK), xbmc.LOGNOTICE)
+			wiz.setS('lastbuildcheck', str(NEXTCHECK))
+			self.close()
+			url = 'plugin://%s/?mode=install&name=%s&url=normal' % (ADDON_ID, urllib.quote_plus(BUILDNAME))
+			xbmc.executebuiltin('RunPlugin(%s)' % url)
+
+		def doIgnore(self):
+			wiz.log("[Check Updates] [Installed Version: %s] [Current Version: %s] [User Selected: Ignore 3 Days]" % (BUILDVERSION, LATESTVERSION), xbmc.LOGNOTICE)
+			wiz.log("[Check Updates] [Next Check: %s]" % str(THREEDAYS), xbmc.LOGNOTICE)
+			wiz.setS('lastbuildcheck', str(THREEDAYS))
+			self.close()
+
+		def onAction(self,action):
+			if   action == ACTION_PREVIOUS_MENU: self.doIgnore()
+			elif action == ACTION_NAV_BACK: self.doIgnore()
+
+		def onClick(self, controlId):
+			if   (controlId == self.fresh): self.doFreshInstall()
+			elif (controlId == self.normal): self.doNormalInstall()
+			else: self.doIgnore()
+
+	update = MyWindow( "BuildUpdate.xml" , ADDON.getAddonInfo('path'), 'DefaultSkin', name=name, current=current, new=new, icon=icon, fanart=fanart)
+	update.doModal()
+	del update
