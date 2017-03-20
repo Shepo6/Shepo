@@ -5,7 +5,7 @@
 # License: GPL (http://www.gnu.org/licenses/gpl-3.0.html)
 # Based on code from youtube addon
 #
-# Author: coldkeys
+# Author: Shepo
 #------------------------------------------------------------
 
 import os
@@ -45,7 +45,7 @@ YOUTUBE_CHANNEL_ID_22  = "MayaTOOTS"
 # Entry point
 def run():
     plugintools.log("docu.run")
-	
+    
     # Get params
     params = plugintools.get_params()
     
@@ -60,6 +60,13 @@ def run():
 # Main menu
 def main_list(params):
     plugintools.log("docu.main_list "+repr(params))
+
+    plugintools.add_item( 
+        #action="", 
+        title="[COLOR red]----- YOUTUBERS -----[/COLOR]",
+        url="",
+        thumbnail="",
+        folder=True )
 
     plugintools.add_item(
         #action="", 
