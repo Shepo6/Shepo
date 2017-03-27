@@ -15,6 +15,26 @@
   </extension>
 </addon>
 
+<addon id="plugin.video.boxinghits" name="[B][COLOR red]Boxing[COLOR blue]Hits[/COLOR][/B]" version="0.1" provider-name="@Shepo06">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+    <import addon="script.module.simplejson" version="3.3.0"/>
+    <import addon="script.module.urlresolver"  version="2.1.2"/>
+    <import addon="script.module.liveresolver" version="0.1.47"/>
+    <import addon="script.common.plugin.cache" version="2.5.2"/>
+    <import addon="script.module.metahandler" version="2.5.1"/>
+    <import addon="plugin.video.youtube" optional="true" />
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">[B][COLOR red]Boxing[COLOR blue]Hits[/COLOR][/B]</summary>
+    <description lang="en">The author of this addon does not own nor is affiliated in any way with the content providers , But is providing a 3rd party way to give access to all links provided</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
 <addon id="plugin.video.littlerascals"
 	name="Little Rascals"
 	version="0.0.1"
