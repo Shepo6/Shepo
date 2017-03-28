@@ -56,7 +56,33 @@
   </extension>
 </addon>
 
-<addon id="repository.Shepo" name="Shepo Repo" version="0.0.4" provider-name="Shepo">
+<addon
+  id="plugin.video.SportsDevil"
+  version="3"
+  name="SportsDevil"
+  provider-name="SportsDevil">
+  <requires>
+   <import addon="xbmc.python" version="2.14.0"/>
+   <import addon="script.module.dateutil" />
+   <import addon="script.module.simplejson" />
+   <import addon="script.module.six" />
+   <import addon="script.module.requests" />
+   <import addon="script.module.livestreamer" />
+  </requires>
+  <extension
+    point="xbmc.python.pluginsource"
+    library="default.py">
+   <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>Play videos of different sports streaming sites</summary>
+    <description>Play videos of different sports streaming sites</description>
+    <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="repository.Shepo" name="Shepo Repo" version="0.0.5" provider-name="Shepo">
 	<extension point="xbmc.addon.repository" name="Shepo Repo">
 		<info compressed="false">https://raw.github.com/Shepo6/Shepo/master/addons.xml</info>
 		<checksum>https://raw.github.com/Shepo6/Shepo/master/addons.xml.md5</checksum>
