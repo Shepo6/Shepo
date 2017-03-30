@@ -26,7 +26,7 @@ RUNNER 			= base64.b64decode(b'aHR0cDovL3NpbXRlY2gubmV0MTYubmV0L3lvdXR1YmUucGhwP
 SEARCH_LIST     = base64.b64decode(b'aHR0cDovL3Bhc3RlYmluLmNvbS9yYXcvTlR2MEpkeDg=')
                                                                
 def GetMenu():
-        xbmc.executebuiltin('Container.SetViewMode(50)')
+        xbmc.executebuiltin('Container.SetViewMode(500)')
         url = baseurl
         link=open_url(baseurl)
         match= re.compile('<item>(.+?)</item>').findall(link)
@@ -188,7 +188,7 @@ def YOUTUBE_CHANNEL(url):
 
 	
 def SEARCH():
-	keyb = xbmc.Keyboard('', '[COLOR red]Boxing[/COLOR] [COLOR white]Hits Search[/COLOR]')
+	keyb = xbmc.Keyboard('', '[COLOR red]Boxing Hits[COLOR white] Search[/COLOR]')
 	keyb.doModal()
 	if (keyb.isConfirmed()):
 		searchterm=keyb.getText()
@@ -502,7 +502,7 @@ def find_single_match(text,pattern):
 def showText(heading, text):
     id = 10147
     xbmc.executebuiltin('ActivateWindow(%d)' % id)
-    xbmc.sleep(50)
+    xbmc.sleep(500)
     win = xbmcgui.Window(id)
     retry = 50
     while (retry > 0):
@@ -518,7 +518,7 @@ def showText(heading, text):
 def view(link):
         try:
                 match= re.compile('<layouttype>(.+?)</layouttype>').findall(link)[0]
-                if layout=='thumbnail': xbmc.executebuiltin('Container.SetViewMode(50)')              
+                if layout=='thumbnail': xbmc.executebuiltin('Container.SetViewMode(500)')              
                 else:xbmc.executebuiltin('Container.SetViewMode(50)')  
         except:pass
 
