@@ -26,7 +26,7 @@ RUNNER 			= base64.b64decode(b'aHR0cDovL3NpbXRlY2gubmV0MTYubmV0L3lvdXR1YmUucGhwP
 SEARCH_LIST     = base64.b64decode(b'aHR0cDovL3Bhc3RlYmluLmNvbS9yYXcvTlR2MEpkeDg=')
                                                                
 def GetMenu():
-        xbmc.executebuiltin('Container.SetViewMode(500)')
+        xbmc.executebuiltin('Container.SetViewMode(55)')
         url = baseurl
         link=open_url(baseurl)
         match= re.compile('<item>(.+?)</item>').findall(link)
@@ -518,7 +518,7 @@ def showText(heading, text):
 def view(link):
         try:
                 match= re.compile('<layouttype>(.+?)</layouttype>').findall(link)[0]
-                if layout=='thumbnail': xbmc.executebuiltin('Container.SetViewMode(500)')              
+                if layout=='thumbnail': xbmc.executebuiltin('Container.SetViewMode(55)')              
                 else:xbmc.executebuiltin('Container.SetViewMode(50)')  
         except:pass
 

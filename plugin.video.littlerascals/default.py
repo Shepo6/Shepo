@@ -41,6 +41,7 @@ YOUTUBE_CHANNEL_ID_19  = "UC4f1zAG2BTkfOQV4_nFbpBQ"
 YOUTUBE_CHANNEL_ID_20  = "biggranny000"
 YOUTUBE_CHANNEL_ID_21  = "UCZlXWfndRF4PWcemogYeu2g"
 YOUTUBE_CHANNEL_ID_22  = "MayaTOOTS"
+YOUTUBE_CHANNEL_ID_23  = "RomanAtwoodVlogs"
 
 # Entry point
 def run():
@@ -61,12 +62,16 @@ def run():
 def main_list(params):
     plugintools.log("docu.main_list "+repr(params))
 
+# Minecraft menu
+def main_list(params):
+    plugintools.log("docu.main_list "+repr(params))
+
     plugintools.add_item( 
         #action="", 
         title="[COLOR red]----- YOUTUBERS -----[/COLOR]",
         url="",
         thumbnail="",
-        folder=True )
+        folder=False )
 
     plugintools.add_item(
         #action="", 
@@ -220,5 +225,12 @@ def main_list(params):
         title="The Pals",
         url="plugin://plugin.video.youtube/user/"+YOUTUBE_CHANNEL_ID_22+"/",
         thumbnail="https://i.ytimg.com/vi/qMSvfHJq0oE/maxresdefault.jpg",
+        folder=True )
+
+	plugintools.add_item( 
+        #action="", 
+        title="The Pals",
+        url="plugin://plugin.video.youtube/user/"+YOUTUBE_CHANNEL_ID_23+"/",
+        thumbnail="https://s-media-cache-ak0.pinimg.com/736x/b3/3f/7e/b33f7e3793e9aced1db66c049432763c.jpg",
         folder=True )
 run()
