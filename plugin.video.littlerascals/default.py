@@ -62,10 +62,6 @@ def run():
 def main_list(params):
     plugintools.log("docu.main_list "+repr(params))
 
-# Minecraft menu
-def main_list(params):
-    plugintools.log("docu.main_list "+repr(params))
-
     plugintools.add_item( 
         #action="", 
         title="[COLOR red]----- YOUTUBERS -----[/COLOR]",
@@ -233,4 +229,5 @@ def main_list(params):
         url="plugin://plugin.video.youtube/user/"+YOUTUBE_CHANNEL_ID_23+"/",
         thumbnail="https://yt3.ggpht.com/-gEaPJYK6Py0/AAAAAAAAAAI/AAAAAAAAAAA/M5vMdn7lFbs/s900-c-k-no-mo-rj-c0xffffff/photo.jpg",
         folder=True )
+
 run()
