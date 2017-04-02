@@ -227,10 +227,10 @@ def main_list(params):
         thumbnail="https://i.ytimg.com/vi/qMSvfHJq0oE/maxresdefault.jpg",
         folder=True )
 
-	plugintools.add_item( 
+    plugintools.add_item( 
         #action="", 
-        title="The Pals",
+        title="RomanAtwoodVlogs",
         url="plugin://plugin.video.youtube/user/"+YOUTUBE_CHANNEL_ID_23+"/",
-        thumbnail="https://s-media-cache-ak0.pinimg.com/736x/b3/3f/7e/b33f7e3793e9aced1db66c049432763c.jpg",
+        thumbnail="https://yt3.ggpht.com/-gEaPJYK6Py0/AAAAAAAAAAI/AAAAAAAAAAA/M5vMdn7lFbs/s900-c-k-no-mo-rj-c0xffffff/photo.jpg",
         folder=True )
 run()
