@@ -5,7 +5,7 @@
 # License: GPL (http://www.gnu.org/licenses/gpl-3.0.html)
 # Based on code from youtube addon
 #
-# Author: Shepo
+# Author: coldkeys
 #------------------------------------------------------------
 
 import os
@@ -41,12 +41,11 @@ YOUTUBE_CHANNEL_ID_19  = "UC4f1zAG2BTkfOQV4_nFbpBQ"
 YOUTUBE_CHANNEL_ID_20  = "biggranny000"
 YOUTUBE_CHANNEL_ID_21  = "UCZlXWfndRF4PWcemogYeu2g"
 YOUTUBE_CHANNEL_ID_22  = "MayaTOOTS"
-YOUTUBE_CHANNEL_ID_23  = "RomanAtwoodVlogs"
 
 # Entry point
 def run():
     plugintools.log("docu.run")
-    
+	
     # Get params
     params = plugintools.get_params()
     
@@ -61,13 +60,6 @@ def run():
 # Main menu
 def main_list(params):
     plugintools.log("docu.main_list "+repr(params))
-
-    plugintools.add_item( 
-        #action="", 
-        title="[COLOR red]----- YOUTUBERS -----[/COLOR]",
-        url="",
-        thumbnail="",
-        folder=False )
 
     plugintools.add_item(
         #action="", 
@@ -222,12 +214,4 @@ def main_list(params):
         url="plugin://plugin.video.youtube/user/"+YOUTUBE_CHANNEL_ID_22+"/",
         thumbnail="https://i.ytimg.com/vi/qMSvfHJq0oE/maxresdefault.jpg",
         folder=True )
-
-    plugintools.add_item( 
-        #action="", 
-        title="RomanAtwoodVlogs",
-        url="plugin://plugin.video.youtube/user/"+YOUTUBE_CHANNEL_ID_23+"/",
-        thumbnail="https://yt3.ggpht.com/-gEaPJYK6Py0/AAAAAAAAAAI/AAAAAAAAAAA/M5vMdn7lFbs/s900-c-k-no-mo-rj-c0xffffff/photo.jpg",
-        folder=True )
-
 run()
