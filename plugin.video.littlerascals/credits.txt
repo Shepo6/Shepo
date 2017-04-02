@@ -1,6 +1,6 @@
 Credits
 
-ARB - Special thanks for all the help
+ARB - Special thanks for all the help and artwork
 ColdKeys - Plugin Template
 WhufcLee - Kodi, Python Kodi, Hardware and Kodi Addon Tutorials
 DaButcher - DaButcher Digs Deeper Live Chat, Kodi Matters Live Chat and Kodi 101 Tutorials
