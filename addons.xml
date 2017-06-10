@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <addons>
+
 <addon id="plugin.program.ShepoWizard" name="Shepo Wizard" version="0.2.3" provider-name="Shepo">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
@@ -11,26 +13,6 @@
   <extension point="xbmc.addon.metadata">
     <summary lang="en">Shepo Wizard</summary>
     <description lang="en">The Shepo Wizard is the home of the Shepo Builds. Thanks to all Devs who have contributed to this project.</description>
-    <platform>all</platform>
-  </extension>
-</addon>
-
-<addon id="plugin.video.boxinghits" name="[COLOR red]Boxing [COLOR white]Hits[/COLOR]" version="0.0.3" provider-name="@Shepo06">
-  <requires>
-    <import addon="xbmc.python" version="2.1.0"/>
-    <import addon="script.module.simplejson" version="3.3.0"/>
-    <import addon="script.module.urlresolver"  version="2.1.2"/>
-    <import addon="script.module.liveresolver" version="0.1.43"/>
-    <import addon="script.common.plugin.cache" version="2.5.2"/>
-    <import addon="script.module.metahandler" version="2.5.1"/>
-    <import addon="plugin.video.youtube" optional="true" />
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary lang="en">Boxing Hits</summary>
-    <description lang="en">All things Boxing. The creator of this addon does not control the content of these streams. Viewer discretion is advised. The author of this addon does not own nor is affiliated in any way with the content providers , But is providing a 3rd party way to give access to all links provided</description>
     <platform>all</platform>
   </extension>
 </addon>
@@ -56,39 +38,11 @@
   </extension>
 </addon>
 
-<addon
-  id="plugin.video.SportsDevil"
-  version="2017.03.28"
-  name="SportsDevil"
-  provider-name="SportsDevil">
-  <requires>
-   <import addon="xbmc.python" version="2.14.0"/>
-   <import addon="script.module.dateutil" />
-   <import addon="script.module.simplejson" />
-   <import addon="script.module.six" />
-   <import addon="script.module.requests" />
-   <import addon="script.module.livestreamer" />
-  </requires>
-  <extension
-    point="xbmc.python.pluginsource"
-    library="default.py">
-   <provides>video</provides>
-  </extension>
-  <extension point="xbmc.service" library="service/proxy_service.py" start="startup" />
-  <extension point="xbmc.addon.metadata">
-    <summary>Play videos of different sports streaming sites</summary>
-    <description>Play videos of different sports streaming sites</description>
-    <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
-    <platform>all</platform>
-  </extension>
-</addon>
-
-<addon id="repository.Shepo" name="Shepo Repo" version="0.0.6" provider-name="Shepo">
+<addon id="repository.Shepo" name="Shepo Repo" version="0.0.8" provider-name="Shepo">
 	<extension point="xbmc.addon.repository" name="Shepo Repo">
 		<info compressed="false">https://raw.github.com/Shepo6/Shepo/master/addons.xml</info>
 		<checksum>https://raw.github.com/Shepo6/Shepo/master/addons.xml.md5</checksum>
 		<datadir zip="true">https://raw.github.com/Shepo6/Shepo/master/</datadir>
-
 	</extension>
 	<extension point="xbmc.addon.metadata">
 		<summary>Shepo Repository</summary>
@@ -96,4 +50,5 @@
 		<platform>all</platform>
 	</extension>
 </addon>
+
 </addons>
