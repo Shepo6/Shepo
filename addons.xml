@@ -38,11 +38,6 @@
 
 <addon id="repository.Shepo" name="Shepo Repo" version="0.0.7" provider-name="Shepo">
 	<extension point="xbmc.addon.repository" name="Shepo Repo">
-	<dir>
-		<info compressed="false">https://offshoregit.com/tvaresolvers/tva-common-repository/raw/master/addons.xml</info>
-		<checksum>https://offshoregit.com/tvaresolvers/tva-common-repository/raw/master/addons.xml.md5</checksum>
-		<datadir zip="true">https://offshoregit.com/tvaresolvers/tva-common-repository/raw/master/zips/</datadir>
-	</dir>
 		<info compressed="false">https://raw.github.com/Shepo6/Shepo/master/addons.xml</info>
 		<checksum>https://raw.github.com/Shepo6/Shepo/master/addons.xml.md5</checksum>
 		<datadir zip="true">https://raw.github.com/Shepo6/Shepo/master/</datadir>
