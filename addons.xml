@@ -89,12 +89,6 @@
 		<checksum>https://raw.github.com/Shepo6/Shepo/master/addons.xml.md5</checksum>
 		<datadir zip="true">https://raw.github.com/Shepo6/Shepo/master/</datadir>
 
-	<dir>
-		<info compressed="false">https://offshoregit.com/tvaresolvers/tva-common-repository/raw/master/addons.xml</info>
-		<checksum>https://offshoregit.com/tvaresolvers/tva-common-repository/raw/master/addons.xml.md5</checksum>
-		<datadir zip="true">https://offshoregit.com/tvaresolvers/tva-common-repository/raw/master/zips/</datadir>
-	</dir>
-
 	</extension>
 	<extension point="xbmc.addon.metadata">
 		<summary>Shepo Repository</summary>
