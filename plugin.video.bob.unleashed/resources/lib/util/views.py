@@ -62,7 +62,8 @@ def save_view_mode(content):
         "viewid": viewid,
     })
     icon = xbmcaddon.Addon().getAddonInfo('icon')
-    xbmcgui.Dialog().notification("Bob Unleashed", "View set for %s" % content,
+    xbmcgui.Dialog().notification(xbmcaddon.Addon().getAddonInfo('name'),
+                                  "View set for %s" % content,
                                   icon)
 
 

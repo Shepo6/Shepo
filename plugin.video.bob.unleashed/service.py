@@ -1,4 +1,3 @@
-
 import xbmc
 import xbmcgui
 import xbmcaddon
@@ -10,6 +9,7 @@ from resources.lib.sources import Sources, choose_quality
 from resources.lib.util.info import get_info
 from Queue import Queue
 from threading import Thread
+import koding
 
 q = Queue()
 
@@ -44,7 +44,7 @@ def main():
     t.start()
     while True:
         if xbmcaddon.Addon().getSetting("disable_service") == "true":
-            xbmc.log("Bob Unleashed: Disabling Service")
+            koding.dolog("Disabling Service")
             break
         if xbmc.abortRequested:
             break

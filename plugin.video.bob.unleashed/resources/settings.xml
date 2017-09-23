@@ -31,7 +31,7 @@
       <!-- scraper settings -->
       <setting label="30734" type="action" option="close"
                action="RunPlugin(plugin://plugin.video.bob.unleashed/?mode=ScraperSettings)"/>
-      <setting id="use_link_dialog"		label="30744"			type="bool"		default="false" />
+      <setting id="use_link_dialog" label="30744" type="bool" default="false" />
       <setting id="link_fallthrough" label="30745" type="bool"	default="true" visible="eq(-1,true)"/>
       <setting label="30741" type="lsep"/>
       <setting label="30742" type="action" option="close"
@@ -49,7 +49,7 @@
       <setting id="include_watched_queue" label="Include Watched In Collection Queueing" type="bool" default="false"/>
       <setting id="background_list_queue" label="Enable Background Queueing For Collection Types (Experimental)"
                type="bool" default="false"/>
-      <setting id="disable_service" label="Disable Background Queue Service (NEEDS A RESTART TO REENABLE AFTER TOGGLING)" type="bool" default="false"/>
+      <setting id="disable_service" label="Disable Background Queue Service (NEEDS A RESTART TO REENABLE AFTER TOGGLING)" type="bool" default="true"/>
       <setting id="autostart_queue" label="Auto start queue if empty" type="bool" default="true"/>
     </category>
 
@@ -65,7 +65,7 @@
     <!-- login - future features for playlisters -->
     <category label="30770">
       <!-- debugging and developer options -->
-      <setting id="debug" type="bool" label="30758" default="false" visible="true"/>      
+      <setting id="debug" type="bool" label="30758" default="false" visible="true"/>
       <setting id="first_run" label="first run" type="bool" default="true" visible="false"/>
       <setting label="Cache Location" id="cache_folder" type="folder" default="special://profile/addon_data/plugin.video.bob.unleashed/"/>
     </category>

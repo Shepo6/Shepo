@@ -39,4 +39,5 @@ parses local xml file as a bob list
     test_file = xbmcvfs.File(os.path.join(profile_path, file_name))
     xml = test_file.read()
     test_file.close()
-    display_list(BobList(xml).get_list(), "videos")
+    boblist = BobList(xml)
+    display_list(boblist.get_list(), boblist.get_content_type())

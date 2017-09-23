@@ -19,12 +19,14 @@
 """
 
 import time
-
+import xbmc
 import requests
 from BeautifulSoup import BeautifulSoup
 from datetime import datetime, timedelta
 from koding import route
 from resources.lib.util.url import proxy_get
+from resources.lib.util.xml import BobList
+from resources.lib.util.xml import display_list
 
 
 @route("sport_acesoplisting")
@@ -34,7 +36,6 @@ get listings from acespoplisting.in
     :return: listing from website in bob list xml format
     :rtype: str
     """
-    import xbmc
     xml = "<fanart>https://www.dropbox.com/s/x3zg9ovot6vipjh/smoke_men-wallpaper-1920x1080.jpg?raw=true</fanart>\n\n\n" \
           "<item>\n" \
           "\t<title>[COLORred]Will require Plexus addon to watch Acestream links.[/COLOR]</title>\n" \
@@ -48,20 +49,20 @@ get listings from acespoplisting.in
           "</item>\n\n" \
           "<item>\n" \
 
-
     try:
-        html = proxy_get("http://www.acesoplisting.in/", 'class="table-responsive"')
+        html = proxy_get("http://www.acesoplisting.in/", 'id="listing"')
         scraped_html = BeautifulSoup(html)
-        table = scraped_html.findAll("table", attrs={'class': 'table table-striped table-bordered table-condensed'})[-1]
+        table = scraped_html.findAll("table", attrs={'id': 'listing'})[-1]
         rows = table.findAll("tr")
         is_today = False
         day_xml = ""
         found_links = False
         for row in rows:
-            headers = row.findAll("th")
             cells = row.findAll("td")
-            if len(headers) > 0:
-                date = headers[0].text.strip()
+            if row.get("class", "") == "info" and not is_today:
+                if not cells:
+                    continue
+                date = cells[0].text.strip()
                 today_number = time.gmtime().tm_mday
                 if str(today_number) in date:
                     is_today = True
@@ -75,7 +76,7 @@ get listings from acespoplisting.in
             elif is_today:
                 if len(cells) < 5:
                     continue
-                event_time = cells[0].text.strip()
+                event_time = cells[1].text.strip()
                 split_time = event_time.split(":")
                 event_hours = int(split_time[0])
                 event_minutes = split_time[1]
@@ -94,10 +95,10 @@ get listings from acespoplisting.in
                     suffix = "AM"
                 event_time = "%s:%s %s" % (est_event_hours, event_minutes, suffix)
 
-                sport = cells[1].text.strip()
-                match = cells[2].text.replace("\n", "").strip()
+                sport = cells[3].text.strip()
+                match = cells[5].text.replace("\n", "").strip()
                 match = " ".join(match.split())
-                league = cells[3].text.strip()
+                league = cells[6].text.strip()
                 if league == "USA NFL":
                     thumbnail = "http://organizationalphysics.com/wp-content/uploads/2013/12/NFLShield.png"
                 elif league == "WWE":
@@ -145,7 +146,7 @@ get listings from acespoplisting.in
                 else:
                     thumbnail = ""
 
-                links = cells[4].findAll("a")
+                links = cells[7].findAll("a")
 
                 if len(links) != 0:
                     found_links = True
@@ -188,9 +189,10 @@ get listings from acespoplisting.in
                   "\t<link></link>\n" \
                   "\t<thumbnail></thumbnail>\n" \
                   "</item>\n"
-        return xml
-    except:
-        pass
+        boblist = BobList(xml)
+        display_list(boblist.get_list(), boblist.get_content_type())
+    except Exception as e:
+        xbmc.log("e:" + repr(e))
 
 
 @route("get_hockey_recaps", args=["url"])
@@ -201,7 +203,8 @@ get game recap listings from nhl
     :return: listing from website in bob list xml format
     :rtype: str
     """
-    import xbmc
+    if page.endswith("a"):
+        page = page[:-1]
     xml = "<fanart>http://www.shauntmax30.com/data/out/29/1189697-100-hdq-nhl-wallpapers.png</fanart>\n\n\n" \
           "<item>\n" \
           "\t<title>[COLORred]| [COLORorange] NHL Condensed Games [COLORred]|[/COLOR]</title>\n" \
@@ -253,12 +256,12 @@ get game recap listings from nhl
            "\t<link>sport_hockeyrecaps{0}</link>\n" \
            "\t<thumbnail></thumbnail>\n" \
            "</dir>\n".format(int(page) + 1)
-    return xml
+    boblist = BobList(xml)
+    display_list(boblist.get_list(), boblist.get_content_type())
 
 
 @route("sport_nhl_games", ["url"])
 def get_nhl_games(epg_date=""):
-    import xbmc
     import string
     if epg_date == "":
         epg_date = datetime.now()
@@ -266,6 +269,8 @@ def get_nhl_games(epg_date=""):
         if now_time <= 4 or now_time >= 23:
             epg_date -= timedelta(hours=4)
         epg_date = epg_date.strftime("%Y-%m-%d")
+    if epg_date.endswith("a"):
+        epg_date = epg_date[:-1]
     xml = ""
     epgurl = "http://statsapi.web.nhl.com/api/v1/schedule?startDate=%s&endDate=%s&expand=schedule.teams,schedule.game.content.media.epg" \
              % (epg_date, epg_date)
@@ -337,15 +342,18 @@ def get_nhl_games(epg_date=""):
             for key in keys:
                 xml += start_xmls[key]
 
-            return xml
+            boblist = BobList(xml)
+            display_list(boblist.get_list(), boblist.get_content_type())
         else:
-            return ""
+            continue
 
 
 @route("nhl_home_away", ["url"])
 def get_nhl_home_away(args):
+    import xbmc
     if args == "":
         return ""
+    args = args.split(",")
     title = args[0]
     home_content_url = args[1]
     away_content_url = args[2]
@@ -379,7 +387,9 @@ def get_nhl_home_away(args):
                    "\t<fanart>http://cdn.wallpapersafari.com/41/55/dqIYaC.jpg</fanart>\n" \
                    "</item>\n".format(game_title, play_url, image)
         xml += game_xml
-    return xml
+    xbmc.log("xml:" + repr(xml), xbmc.LOGNOTICE)
+    boblist = BobList(xml)
+    display_list(boblist.get_list(), boblist.get_content_type())
 
 
 @route("sport_nfl_games", ["url"])
@@ -458,7 +468,8 @@ def get_nfl_games(args):
     for key in keys:
         xml += start_xmls[key]
 
-    return xml
+    boblist = BobList(xml)
+    display_list(boblist.get_list(), boblist.get_content_type())
 
 
 @route("get_nfl_game", ["url"])
@@ -539,7 +550,8 @@ def get_nfl_game(game_id):
                    "</item>\n".format(key, streams[key], thumbnail, fanart)
 
         xml += game_xml
-    return xml
+    boblist = BobList(xml)
+    display_list(boblist.get_list(), boblist.get_content_type())
 
 
 @route("sport_condensed_nfl_games", ["url"])
@@ -618,7 +630,8 @@ def get_condensed_nfl_games(args):
     for key in keys:
         xml += start_xmls[key]
 
-    return xml
+    boblist = BobList(xml)
+    display_list(boblist.get_list(), boblist.get_content_type())
 
 
 @route("sport_condensed_nfl_get_game", ["url"])
@@ -697,6 +710,7 @@ def get_condensed_nfl_game(game_id):
                    "</item>\n".format(key, streams[key], thumbnail, fanart)
 
         xml += game_xml
-    return xml
+    boblist = BobList(xml)
+    display_list(boblist.get_list(), boblist.get_content_type())
 
 #  LocalWords:  acesoplisting

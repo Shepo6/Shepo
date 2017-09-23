@@ -164,7 +164,8 @@ def get_searching_message(preset):
         messages.extend([
             'Fuck Shit Wank -- Costa',
             'Frankly my dear, I don\'t give a Bob',
-            'Beast Build Detected, Installing dangerous pyo file'
+            'Beast Build Detected, Installing dangerous pyo file',
+            'Costa wants to aduse Emma'
         ])
 
     if preset == "search":

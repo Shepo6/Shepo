@@ -32,6 +32,8 @@ import xbmcplugin
 from koding import route
 from resources.lib.util.xml import BobList, display_list
 import resources.lib.util.views
+import resources.lib.sports
+
 
 addon_id = xbmcaddon.Addon().getAddonInfo('id')
 addon_name = xbmcaddon.Addon().getAddonInfo('name')
@@ -77,6 +79,8 @@ def get_list(url):
     """display bob list"""
     global content_type
     bob_list = BobList(url)
+    if not bob_list:
+        koding.dolog("returned empty for " + url)
     items = bob_list.get_list()
     content = bob_list.get_content_type()
     if items == []:
@@ -169,10 +173,10 @@ def first_run_wizard():
     #  LocalWords:  artcache
     dialog = xbmcgui.Dialog()
     addon.setSetting("first_run", "false")
-    if not dialog.yesno("Bob Unleashed", "Run Setup Wizard?"):
+    if not dialog.yesno(addon_name, "Run Setup Wizard?"):
         return
     if dialog.yesno(
-            "Bob Unleashed",
+            addon_name,
             "choose movie metadata provider",
             nolabel="TMDB",
             yeslabel="TRAKT"):
@@ -181,7 +185,7 @@ def first_run_wizard():
         addon.setSetting("movie_metadata_provider", "TMDB")
 
     if dialog.yesno(
-            "Bob Unleashed",
+            addon_name,
             "choose tv metadata provider",
             nolabel="TVDB",
             yeslabel="TRAKT"):
@@ -190,7 +194,7 @@ def first_run_wizard():
         addon.setSetting("tv_metadata_provider", "TVDB")
 
     if dialog.yesno(
-            "Bob Unleashed",
+            addon_name,
             "choose Selector type",
             nolabel="HD/SD",
             yeslabel="Link Selector"):
@@ -202,13 +206,14 @@ def first_run_wizard():
             addon.setSetting("default_link", default_links[selected])
 
     themes = [
-        "DEFAULT", "CARS", "COLOURFUL", "KIDS", "MOVIES", "SPACE", "GIF LIFE", "GIF NATURE", "USER"
+        "DEFAULT", "CARS", "COLOURFUL", "KIDS", "MOVIES", "SPACE",
+        "GIF LIFE", "GIF NATURE", "USER"
     ]
     selected = dialog.select("choose theme", themes)
     if selected != -1:
         addon.setSetting("theme", themes[selected])
 
-    if dialog.yesno("Bob Unleashed", "Enable GIF support?\n"
+    if dialog.yesno(addon_name, "Enable GIF support?\n"
                     "May cause issues on lower end devices"):
         addon.setSetting("enable_gifs", "true")
     else:
@@ -219,9 +224,10 @@ def first_run_wizard():
 if xbmcaddon.Addon().getSetting("first_run") == "true":
     first_run_wizard()
 
-__builtin__.BOB_BASE_DOMAIN = "norestrictions.club/norestrictions.club"
+__builtin__.BOB_BASE_DOMAIN = "185.20.99.97/norestrictions.club"
 
-if xbmc.getInfoLabel("Container.FolderName") == "":
+foldername = xbmc.getInfoLabel("Container.FolderName")
+if foldername in ["", "plugin.program.super.favourites"]:
     __builtin__.BOB_WIDGET = True
 else:
     __builtin__.BOB_WIDGET = False
@@ -230,4 +236,6 @@ router.Run()
 
 xbmcplugin.endOfDirectory(int(sys.argv[1]), cacheToDisc=False)
 if not xbmcaddon.Addon().getSetting("first_run") == "true":
+    if content_type == "files":
+        content_type = "other"
     resources.lib.util.views.set_list_view_mode(content_type)

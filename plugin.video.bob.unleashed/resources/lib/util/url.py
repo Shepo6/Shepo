@@ -63,13 +63,14 @@ def __replace_gif(url):
                     del data
                     del response
                 if os.path.getsize(dest) == 0:
-                    xbmc.log("0 size gif: " + repr(dest))
+                    koding.dolog("0 size gif: " + repr(dest))
                     os.remove(dest)
                     return None
                 else:
-                    xbmc.log("size: " + repr(os.path.getsize(dest)))
+                    koding.dolog("size: " + repr(os.path.getsize(dest)))
             else:
-                koding.Text_Box("BoB Unleashed", "gif not found: " + url)
+                koding.Text_Box(xbmcaddon.Addon().getAddonInfo('name'),
+                                "gif not found: " + url)
                 return None
         xbmc.log("gif done: " + repr(dest))
         return dest
@@ -91,17 +92,22 @@ def replace_url(url, replace_gif=True):
     if 'norestrictions.noobsandnerds.com' in url and 'norestrictions.club/norestrictions.club' not in url:
         url = url.replace('norestrictions.noobsandnerds.com',
                           __builtin__.BOB_BASE_DOMAIN)
+        url = url.replace("http", "https")
     elif 'www.norestrictions.club' in url and 'www.norestrictions.club/norestrictions.club' not in url and 'norestrictions.club/norestrictions.club' not in url:
         url = url.replace('www.norestrictions.club',
                           __builtin__.BOB_BASE_DOMAIN)
+        url = url.replace("http", "https")
     elif 'www.norestrictions.club/norestrictions.club' in url:
         url = url.replace(
             'www.norestrictions.club/norestrictions.club', __builtin__.BOB_BASE_DOMAIN)
+        url = url.replace("http", "https")
     elif 'norestrictions.club' in url and 'norestrictions.club/norestrictions.club' not in url:
         url = url.replace('norestrictions.club', __builtin__.BOB_BASE_DOMAIN)
+        url = url.replace("http", "https")
     elif 'norestrictions.club/norestrictions.club' in url:
         url = url.replace(
             'norestrictions.club/norestrictions.club', __builtin__.BOB_BASE_DOMAIN)
+        url = url.replace("http", "https")
     enable_gifs = xbmcaddon.Addon().getSetting('enable_gifs') == "true"
     if enable_gifs and replace_gif:
         return __replace_gif(url)

@@ -128,9 +128,9 @@ def do_search(term=None):
                                                    item["label"])
             except:
                 import xbmc
-                xbmc.log("playlister: " + repr(playlister), xbmc.LOGDEBUG)
-                xbmc.log("label:" + repr(item["lable"]), xbmc.LOGDEBUG)
-                xbmc.log("item: " + repr(item), xbmc.LOGDEBUG)
+                koding.dolog("playlister: " + repr(playlister))
+                koding.dolog("label:" + repr(item["lable"]))
+                koding.dolog("item: " + repr(item))
                 raise Exception()
             if title.startswith(search_term + " "):
                 exact_result_list.append(item)
@@ -164,6 +164,7 @@ def add_search():
         return
     koding.Add_To_Table("search", {"term": term})
     do_search(term)
+    xbmc.executebuiltin("Container.Refresh")
 
 
 @route(mode="remove_search", args=["url"])
@@ -175,7 +176,7 @@ def remove_search(term):
 @route(mode="clear_search")
 def clear_search():
     koding.Remove_Table("search")
-    xbmc.executebuiltin("Container.update(%s)" % get_addon_url("Search"))
+    xbmc.executebuiltin("Container.update(%s, replace)" % get_addon_url("Search"))
 
 
 def get_xml(link):

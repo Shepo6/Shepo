@@ -68,7 +68,7 @@ def get_context_items(item):
     else:
         context.append(("Set View",
                         "RunPlugin({0})".format(
-                            get_addon_url("save_view_mode", "othe"))))
+                            get_addon_url("save_view_mode", "other"))))
 
     # extended info mod/qlickplay
     if xbmc.getCondVisibility("system.hasaddon(script.qlickplay)") or \

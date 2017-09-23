@@ -26,6 +26,7 @@ import requests
 import resources.lib.external.tmdbsimple as tmdbsimple
 import resources.lib.external.tvdb_api as tvdb_api
 from koding import route
+import koding
 import pickle
 
 ADDON = xbmcaddon.Addon()
@@ -179,8 +180,12 @@ converts tmdb movie metadata to format suited for kodiswift
                 [genres_dict[x] for x in movie['genre_ids']])
         else:
             info['genre'] = ''
-    if movie.get('trailer'):
-        info['trailer'] = make_trailer(movie['trailer'])
+    videos = tmdbsimple.Movies(movie["id"]).videos()
+    for video in videos["results"]:
+        xbmc.log("video:" + repr(video), xbmc.LOGNOTICE)
+        if video["type"] == "Trailer" and video["site"] == "YouTube":
+            info["trailer"] = 'plugin://plugin.video.youtube/play/?video_id=%s' % (video["key"])
+            break
     return info
 
 
@@ -830,13 +835,17 @@ def get_info(items, dialog=None):
             elif content == "episode":
                 item_info = get_episode_metadata(item["imdb"], item["season"],
                                                  item["episode"])
+
+            if not item_info.get("plotoutline", None):
+                item_info["plotoutline"] = item_info.get("plot", "")
         except Exception as e:
-            xbmc.log("info error: " + repr(e))
+            koding.dolog("info error: " + repr(e))
         summary = item.get("summary", False)
         if summary:
             if not item_info or type(item_info) != dict:
                 item_info = {}
             item_info["plot"] = summary
+            item_info["manual"] = True
 
         info.append(item_info)
     if dialog:
