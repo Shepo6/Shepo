@@ -1,27 +1,27 @@
 <xml>
   <dir>
     <title>[COLOR white][B]Movies[/B][/COLOR]</title>
-    <link>http://shepobuild.com/Add-on%20Files/Movies/movies_main.xml</link>
+    <link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/Movies/movies_main.xml</link>
   </dir>
 
   <dir>
     <title>[COLOR white][B]TV[/B][/COLOR]</title>
-    <link>http://shepobuild.com/Add-on%20Files/TV/tv_main.xml</link>
+    <link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/TV/tv_main.xml</link>
   </dir>
 
   <dir>
     <title>[COLOR white][B]Kids[/B][/COLOR]</title>
-    <link>http://shepobuild.com/Add-on%20Files/Kids/kids_main.xml</link>
+    <link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/Kids/kids_main.xml</link>
   </dir>
 
   <dir>
     <title>[COLOR white][B]Boxing[/B][/COLOR]</title>
-    <link>http://shepobuild.com/Add-on%20Files/Boxing/boxing_main.xml</link>
+    <link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/Boxing/boxing_main.xml</link>
   </dir>
 
   <dir>
     <title>[COLOR white][B]Music Concerts[/B][/COLOR]</title>
-    <link>http://shepobuild.com/Add-on%20Files/concerts.xml</link>
+    <link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/concerts.xml</link>
   </dir>
 
   <dir>
