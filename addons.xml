@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
 <addon id="plugin.program.ShepoWizard" name="Shepo Wizard" version="0.2.4" provider-name="Shepo">
   <requires>
