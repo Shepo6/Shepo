@@ -1,45 +1,45 @@
 <xml>
   <dir>
     <title>Actors</title>
-    <link>http://shepobuild.com/Add-on%20Files/Movies/actors.xml</link>
+    <link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/Movies/actors.xml</link>
   </dir>
 
 <dir>
     <title>Actresses</title>
-    <link>http://shepobuild.com/Add-on%20Files/Movies/actress.xml</link>
+    <link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/Movies/actress.xml</link>
   </dir>
 
 <dir>
     <title>Chicks</title>
-    <link>http://shepobuild.com/Add-on%20Files/Movies/chicks.xml</link>
+    <link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/Movies/chicks.xml</link>
   </dir>
 
 <dir>
     <title>Collections</title>
-    <link>http://shepobuild.com/Add-on%20Files/Movies/collections.xml</link>
+    <link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/Movies/collections.xml</link>
   </dir>
 
 <dir>
     <title>Movie Genres</title>
-    <link>http://shepobuild.com/Add-on%20Files/Movies/genre_movies.xml</link>
+    <link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/Movies/genre_movies.xml</link>
 </dir>
 
 <dir>
     <title>User Lists</title>
-    <link>http://shepobuild.com/Add-on%20Files/Movies/lists.xml</link>
+    <link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/Movies/lists.xml</link>
 </dir>
   
 <dir>
     <title>Movie Years</title>
-    <link>http://shepobuild.com/Add-on%20Files/Movies/movie-years.xml</link>
+    <link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/Movies/movie-years.xml</link>
   </dir>
 
 <dir>
     <title>Production Companies</title>
-    <link>http://shepobuild.com/Add-on%20Files/Movies/production.xml</link>
+    <link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/Movies/production.xml</link>
   </dir>
 
   <dir>
     <title>TMDB / Trakt Lists</title>
-    <link>http://shepobuild.com/Add-on%20Files/Movies/tmdb_trakt_lists.xml</link>
+    <link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/Movies/tmdb_trakt_lists.xml</link>
 </dir>
