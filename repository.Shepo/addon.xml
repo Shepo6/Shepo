@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="repository.Shepo" name="Shepo Repo" version="1.0" provider-name="Shepo">
+<addon id="repository.Shepo" name="Shepo Repo" version="0.0.8" provider-name="Shepo">
 	<extension point="xbmc.addon.repository" name="Shepo Repo">
 		<info compressed="false">https://raw.github.com/Shepo6/Shepo/master/addons.xml</info>
 		<checksum>https://raw.github.com/Shepo6/Shepo/master/addons.xml.md5</checksum>
