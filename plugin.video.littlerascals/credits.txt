@@ -1,8 +1,0 @@
-Credits
-
-My Kids for the Content.
-ARB - Special thanks for all the help.
-ColdKeys - Plugin Template.
-WhufcLee - Kodi, Python Kodi, Hardware and Kodi Addon Tutorials.
-DaButcher - DaButcher Digs Deeper Live Chat, Kodi Matters Live Chat and Kodi 101 Tutorials.
-All the guys at N&N for creating the coding for this addon.
