@@ -1,2 +1,0 @@
-# Shepo
-Shepo Repository
