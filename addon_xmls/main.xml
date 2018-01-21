@@ -1,0 +1,48 @@
+<xml>
+  <dir>
+    <title>[COLOR white][B]Movies[/B][/COLOR]</title>
+    <link>http://shepobuild.com/Add-on%20Files/Movies/movies_main.xml</link>
+  </dir>
+
+  <dir>
+    <title>[COLOR white][B]TV[/B][/COLOR]</title>
+    <link>http://shepobuild.com/Add-on%20Files/TV/tv_main.xml</link>
+  </dir>
+
+  <dir>
+    <title>[COLOR white][B]Kids[/B][/COLOR]</title>
+    <link>http://shepobuild.com/Add-on%20Files/Kids/kids_main.xml</link>
+  </dir>
+
+  <dir>
+    <title>[COLOR white][B]Boxing[/B][/COLOR]</title>
+    <link>http://shepobuild.com/Add-on%20Files/Boxing/boxing_main.xml</link>
+  </dir>
+
+  <dir>
+    <title>[COLOR white][B]Music Concerts[/B][/COLOR]</title>
+    <link>http://shepobuild.com/Add-on%20Files/concerts.xml</link>
+  </dir>
+
+  <dir>
+    <title>[COLOR white][B]Search Trakt[/B][/COLOR]</title>
+    <trakt>search</trakt>
+  </dir>
+
+  <dir>
+    <title>[COLOR white][B]Search TMDB[/B][/COLOR]</title>
+    <tmdb>search</tmdb>
+  </dir>
+
+  <plugin>
+    <name>[COLOR white][B]Search Add-on[/B][/COLOR]</name>
+    <link>plugin://plugin.video.jen/?action=search</link>
+  </plugin>
+
+  <plugin>
+    <name>[COLOR white][B]Testings[/B][/COLOR]</name>
+    <link>plugin://plugin.video.jenplugin/?action=developer</link>
+    <thumbnail></thumbnail>
+    <summary>Testings</summary>
+  </plugin>
+</xml>

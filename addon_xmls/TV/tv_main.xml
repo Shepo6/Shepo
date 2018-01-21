@@ -1,0 +1,14 @@
+ <dir>
+    <title>Tv Genres</title>
+    <link>http://shepobuild.com/Add-on%20Files/TV/genres_tv.xml</link>
+ </dir>
+
+ <dir>
+    <title>Networks</title>
+    <link>http://shepobuild.com/Add-on%20Files/TV/networks.xml</link>
+  </dir>
+
+   <dir>
+    <title>TMDB / Trakt Lists</title>
+    <link>http://shepobuild.com/Add-on%20Files/TV/tmdb_trakt_lists.xml</link>
+  </dir>
