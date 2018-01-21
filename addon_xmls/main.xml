@@ -1,46 +1,46 @@
 <xml>
   <dir>
-    <title>[COLOR white][B]Movies[/B][/COLOR]</title>
+    <title>Movies</title>
     <link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/Movies/movies_main.xml</link>
   </dir>
 
   <dir>
-    <title>[COLOR white][B]TV[/B][/COLOR]</title>
+    <title>TV</title>
     <link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/TV/tv_main.xml</link>
   </dir>
 
   <dir>
-    <title>[COLOR white][B]Kids[/B][/COLOR]</title>
+    <title>Kids</title>
     <link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/Kids/kids_main.xml</link>
   </dir>
 
   <dir>
-    <title>[COLOR white][B]Boxing[/B][/COLOR]</title>
+    <title>Boxing</title>
     <link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/Boxing/boxing_main.xml</link>
   </dir>
 
   <dir>
-    <title>[COLOR white][B]Music Concerts[/B][/COLOR]</title>
+    <title>Music Concerts</title>
     <link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/concerts.xml</link>
   </dir>
 
   <dir>
-    <title>[COLOR white][B]Search Trakt[/B][/COLOR]</title>
+    <title>Search Trakt</title>
     <trakt>search</trakt>
   </dir>
 
   <dir>
-    <title>[COLOR white][B]Search TMDB[/B][/COLOR]</title>
+    <title>Search TMDB</title>
     <tmdb>search</tmdb>
   </dir>
 
   <plugin>
-    <name>[COLOR white][B]Search Add-on[/B][/COLOR]</name>
+    <name>Search Add-on</name>
     <link>plugin://plugin.video.jen/?action=search</link>
   </plugin>
 
   <plugin>
-    <name>[COLOR white][B]Testings[/B][/COLOR]</name>
+    <name>Testings</name>
     <link>plugin://plugin.video.jenplugin/?action=developer</link>
     <thumbnail></thumbnail>
     <summary>Testings</summary>
