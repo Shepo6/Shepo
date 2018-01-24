@@ -1,0 +1,141 @@
+<item>
+<title>[COLOR red]Contact @Shepo06 for requests or report any broken links[/COLOR]</title>
+<link></link>
+<thumbnail>http://i.imgur.com/CyTtpgR.png</thumbnail>
+<fanart>http://i.imgur.com/vLyBcD1.jpg</fanart>
+</item>
+
+<item>
+<title>[COLOR red]---------------------------------------------------------------[/COLOR]</title>
+<link></link>
+<thumbnail>http://i.imgur.com/CyTtpgR.png</thumbnail>
+<fanart>http://i.imgur.com/vLyBcD1.jpg</fanart>
+</item>
+
+<item>
+	<title>Rocky</title>
+	<meta>
+		<content>movie</content>
+		<imdb>tt0075148</imdb>
+		<title>Rocky 1976</title>
+		<year>1976</year>
+	</meta>
+	<link>
+		<sublink>search</sublink>
+		<sublink>searchsd</sublink>
+	</link>
+	<thumbnail>http://image.tmdb.org/t/p/w500/9TUR3s1PMJHwDRbpm7PWQ0S7IRy.jpg</thumbnail>
+	<fanart>http://image.tmdb.org/t/p/original/2kkyt0FLROrXt41IgSdE7goCFNQ.jpg</fanart>
+</item>
+
+<item>
+	<title>Rocky II</title>
+	<meta>
+		<content>movie</content>
+		<imdb>tt0079817</imdb>
+		<title>Rocky II</title>
+		<year>1979</year>
+	</meta>
+	<link>
+		<sublink>search</sublink>
+		<sublink>searchsd</sublink>
+	</link>
+	<thumbnail>http://image.tmdb.org/t/p/w500/fqJH7mI4dFANRay8qdJoGa7fK1k.jpg</thumbnail>
+	<fanart>http://image.tmdb.org/t/p/original/xx9DyVNmehDJPrYGsy9AJgYzAtd.jpg</fanart>
+</item>
+
+<item>
+	<title>Rocky III</title>
+	<meta>
+		<content>movie</content>
+		<imdb>tt0084602</imdb>
+		<title>Rocky III</title>
+		<year>1982</year>
+	</meta>
+	<link>
+		<sublink>search</sublink>
+		<sublink>searchsd</sublink>
+	</link>
+	<thumbnail>http://image.tmdb.org/t/p/w500/ns55NGqTDEEjcI9z2a9htA2cFtG.jpg</thumbnail>
+	<fanart>http://image.tmdb.org/t/p/original/6qYptQG2ynJANbyjjYOt4fpHfxF.jpg</fanart>
+</item>
+
+<item>
+	<title>Rocky IV</title>
+	<meta>
+		<content>movie</content>
+		<imdb>tt0089927</imdb>
+		<title>Rocky IV</title>
+		<year>1985</year>
+	</meta>
+	<link>
+		<sublink>search</sublink>
+		<sublink>searchsd</sublink>
+	</link>
+	<thumbnail>http://image.tmdb.org/t/p/w500/q2nkVddOshjhJ19oQYmViQHxyjj.jpg</thumbnail>
+	<fanart>http://image.tmdb.org/t/p/original/uvbjTLZSxGehXWDo1ENyVuBrYie.jpg</fanart>
+</item>
+
+<item>
+	<title>Rocky V</title>
+	<meta>
+		<content>movie</content>
+		<imdb>tt0100507</imdb>
+		<title>Rocky V</title>
+		<year>1990</year>
+	</meta>
+	<link>
+		<sublink>search</sublink>
+		<sublink>searchsd</sublink>
+	</link>
+	<thumbnail>http://image.tmdb.org/t/p/w500/5P2RiuLt31mWyb6duww8qlAhs6G.jpg</thumbnail>
+	<fanart>http://image.tmdb.org/t/p/original/dr5pdEDOdCvelCQqP32UZubiSgE.jpg</fanart>
+</item>
+
+<item>
+	<title>Rocky Balboa</title>
+	<meta>
+		<content>movie</content>
+		<imdb>tt0479143</imdb>
+		<title>Rocky Balboa</title>
+		<year>2006</year>
+	</meta>
+	<link>
+		<sublink>search</sublink>
+		<sublink>searchsd</sublink>
+	</link>
+	<thumbnail>http://image.tmdb.org/t/p/w500/usZMPGxyRsyOpX5nuqHFxH3qlMh.jpg</thumbnail>
+	<fanart>http://image.tmdb.org/t/p/original/gcFhaI5IrKxvMs4TtvlHbYE4b0.jpg</fanart>
+</item>
+
+<item>
+	<title>Creed (2015)</title>
+	<meta>
+		<content>movie</content>
+		<imdb>tt3076658</imdb>
+		<title>Creed</title>
+		<year>2015</year>
+	</meta>
+	<link>
+		<sublink>search</sublink>
+		<sublink>searchsd</sublink>
+	</link>
+	<thumbnail>http://image.tmdb.org/t/p/original/xSE4NBFDzqedwa4AIj99r1Z7ljF.jpg</thumbnail>
+	<fanart>http://image.tmdb.org/t/p/original/nF4kmc4gDRQU4OJiJgk6sZtbJbl.jpg</fanart>
+</item>
+
+<item>                
+	<title></ title>                                                                            //This does not affect the scraper title. this is just for show
+	<meta>                                                                                      //Start of information gathered for movie
+		<content>movie</content>                                                                //Type of media
+		<imdb>tt0479143</imdb>                                                                  //imdb Movie id
+		<title>Rocky Balboa</title>                                                             //This is the Title that the scraper searches for
+		<year>2006</year>                                                                       //Year of Movie
+	</meta>                                                                                     //End of information gathered for movie
+	<link>                                                                                      //Opens link tag
+		<sublink>search</sublink>                                                               //Search HD links as Priority
+		<sublink>searchsd</sublink>                                                             //Search SD links if no HD links are found
+	</link>                                                                                     //Opens link tag
+	<thumbnail>http://image.tmdb.org/t/p/w500/usZMPGxyRsyOpX5nuqHFxH3qlMh.jpg</thumbnail>       //Thumbnail of Movie
+	<fanart>http://image.tmdb.org/t/p/original/gcFhaI5IrKxvMs4TtvlHbYE4b0.jpg</fanart>          //Fanart of Movie
+</item>

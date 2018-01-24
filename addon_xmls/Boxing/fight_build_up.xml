@@ -1,0 +1,62 @@
+<dir>
+	<name>[COLOR red]Important Information (Click Here)[/COLOR]</name>
+	<link>message(http://www.norestrictions.club/shepo/notification.xml)</link>
+	<animated_thumbnail>http://www.norestrictions.club/reloaded/icons/Main/Main-Shepo.gif</animated_thumbnail>
+	<thumbnail>http://www.norestrictions.club/reloaded/icons/Main/Main-Shepo.png</thumbnail>
+	<fanart>http://i.imgur.com/nMvCf9l.jpg</fanart>
+</dir>
+
+<plugin>
+<title>[COLOR white]BoxNation Build Up Videos[/COLOR]</title>
+<link>plugin://plugin.video.youtube/user/boxnationofficial/</link>
+<thumbnail>https://imgur.com/azUYcRd</thumbnail>
+<fanart>http://i.imgur.com/uJAaUXS.jpg</fanart>
+</plugin>
+
+<plugin>
+<title>[COLOR white]British Boxers Build Up Videos[/COLOR]</title>
+<link>plugin://plugin.video.youtube/user/britishboxersUK/</link>
+<thumbnail>https://yt3.ggpht.com/-w7lHXCLPcYc/AAAAAAAAAAI/AAAAAAAAAAA/kH3E7qkNzOA/s900-c-k-no-mo-rj-c0xffffff/photo.jpg</thumbnail>
+<fanart>https://yt3.ggpht.com/-w7lHXCLPcYc/AAAAAAAAAAI/AAAAAAAAAAA/kH3E7qkNzOA/s900-c-k-no-mo-rj-c0xffffff/photo.jpg</fanart>
+
+<plugin>
+<title>[COLOR white]FightHype Build Up Videos[/COLOR]</title>
+<link>plugin://plugin.video.youtube/user/fighthype/</link>
+<thumbnail>https://yt3.ggpht.com/-Ubu4xwiIrkc/AAAAAAAAAAI/AAAAAAAAAAA/TQx7nP_-vXc/s900-c-k-no-mo-rj-c0xffffff/photo.jpg</thumbnail>
+<fanart>https://yt3.ggpht.com/-Ubu4xwiIrkc/AAAAAAAAAAI/AAAAAAAAAAA/TQx7nP_-vXc/s900-c-k-no-mo-rj-c0xffffff/photo.jpg</fanart>
+</plugin>
+
+<plugin>
+<title>[COLOR white]Golden Boy Boxing Build Up Videos[/COLOR]</title>
+<link>plugin://plugin.video.youtube/user/goldenboypromo/</link>
+<thumbnail>http://www.boxeomundial.com/wp-content/uploads/2013/01/Golden_Boy_Logo-261x242.jpg</thumbnail>
+<fanart>http://www.boxeomundial.com/wp-content/uploads/2013/01/Golden_Boy_Logo-261x242.jpg</fanart>
+</item>
+
+<plugin>
+<title>[COLOR white]HatmanStrikesBack Build Up Videos[/COLOR]</title>
+<link>plugin://plugin.video.youtube/user/HatmanStrikesBack/</link>
+<thumbnail>https://yt3.ggpht.com/-gkiij8BP3mw/AAAAAAAAAAI/AAAAAAAAAAA/rAIXipjN5ro/s900-c-k-no-mo-rj-c0xffffff/photo.jpg</thumbnail>
+<fanart>https://yt3.ggpht.com/-gkiij8BP3mw/AAAAAAAAAAI/AAAAAAAAAAA/rAIXipjN5ro/s900-c-k-no-mo-rj-c0xffffff/photo.jpg</fanart>
+</plugin>
+
+<plugin>
+<title>[COLOR white]HBOBoxing Build Up Videos[/COLOR]</title>
+<link>plugin://plugin.video.youtube/user/HBOsports/</link>
+<thumbnail>https://yt3.ggpht.com/-xspd8uYupTc/AAAAAAAAAAI/AAAAAAAAAAA/UTwanzEE9iM/s900-c-k-no-mo-rj-c0xffffff/photo.jpg</thumbnail>
+<fanart>https://yt3.ggpht.com/-xspd8uYupTc/AAAAAAAAAAI/AAAAAAAAAAA/UTwanzEE9iM/s900-c-k-no-mo-rj-c0xffffff/photo.jpg</fanart>
+</plugin>
+
+<plugin>
+<title>[COLOR white]iFL TV Build Up Videos[/COLOR]</title>
+<link>plugin://plugin.video.youtube/user/iFilmLdnProductions/</link>
+<thumbnail>https://yt3.ggpht.com/-aBdJXeua6zE/AAAAAAAAAAI/AAAAAAAAAAA/HmMwEVyz1cg/s900-c-k-no-mo-rj-c0xffffff/photo.jpg</thumbnail>
+<fanart>https://yt3.ggpht.com/-aBdJXeua6zE/AAAAAAAAAAI/AAAAAAAAAAA/HmMwEVyz1cg/s900-c-k-no-mo-rj-c0xffffff/photo.jpg</fanart>
+</plugin>
+
+<item>
+<title></ title>
+<link></link>
+<thumbnail></thumbnail>
+<fanart></fanart>
+</item>
