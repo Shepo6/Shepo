@@ -33,15 +33,6 @@
 <fanart>http://i.imgur.com/AsYemPq.jpg</fanart>
 </dir>
 
-<!--  
-<dir>
-<title>[COLOR red]Boxing[/COLOR] [COLOR white]Fighter Of The Month[/COLOR]</title>
-<link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/Boxing/fighter_of_the_month/fighter_of_the_month_main.xml</link>
-<thumbnail>http://i.imgur.com/atgEQdJ.jpg</thumbnail>
-<fanart>http://i.imgur.com/1ssL0Zo.jpg</fanart>
-</dir>
--->
-
 <dir>
 <title>[COLOR red]Boxing[/COLOR] [COLOR white]Fights Of The Year[/COLOR]</title>
 <link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/Boxing/fight_of_the_year.xml</link>
