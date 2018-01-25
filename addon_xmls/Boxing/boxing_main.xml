@@ -1,6 +1,6 @@
 <dir>
 <title>[COLOR red]Boxing[/COLOR] [COLOR white]Replays[/COLOR]</title>
-<link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/replays.xml</link>
+<link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/Boxing/replays.xml</link>
 <thumbnail>http://i.imgur.com/bns2njT.jpg</thumbnail>
 <fanart>http://i.imgur.com/Eqtb8um.jpg</fanart>
 </dir>
@@ -14,21 +14,21 @@
 
 <dir>
 <title>[COLOR red]Boxing[/COLOR] [COLOR white]Movies[/COLOR]</title>
-<link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/movies/movies_main.xml</link>
+<link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/Boxing/movies/movies_main.xml</link>
 <thumbnail>http://i.imgur.com/D3TH6ya.jpg</thumbnail>
 <fanart>http://i.imgur.com/vLyBcD1.jpg</fanart>
 </dir>
 
 <dir>
 <title>[COLOR red]Boxing[/COLOR] [COLOR white]Documentaries[/COLOR]</title>
-<link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/documentaries/documentaries_main.xml</link>
+<link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/Boxing/documentaries/documentaries_main.xml</link>
 <thumbnail>http://i.imgur.com/xEx9UGE.jpg</thumbnail>
 <fanart>http://i.imgur.com/NcUtU4G.jpg</fanart>
 </dir>
 
 <dir>
 <title>[COLOR red]Boxing[/COLOR] [COLOR white]Fight Requests[/COLOR]</title>
-<link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/requests.xml</link>
+<link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/Boxing/requests.xml</link>
 <thumbnail>http://i.imgur.com/iJSdO5c.jpg</thumbnail>
 <fanart>http://i.imgur.com/AsYemPq.jpg</fanart>
 </dir>
@@ -36,7 +36,7 @@
 <!--  
 <dir>
 <title>[COLOR red]Boxing[/COLOR] [COLOR white]Fighter Of The Month[/COLOR]</title>
-<link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/fighter_of_the_month/fighter_of_the_month_main.xml</link>
+<link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/Boxing/fighter_of_the_month/fighter_of_the_month_main.xml</link>
 <thumbnail>http://i.imgur.com/atgEQdJ.jpg</thumbnail>
 <fanart>http://i.imgur.com/1ssL0Zo.jpg</fanart>
 </dir>
@@ -44,21 +44,21 @@
 
 <dir>
 <title>[COLOR red]Boxing[/COLOR] [COLOR white]Fights Of The Year[/COLOR]</title>
-<link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/fight_of_the_year.xml</link>
+<link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/Boxing/fight_of_the_year.xml</link>
 <thumbnail>http://i.imgur.com/yjovOCp.jpg</thumbnail>
 <fanart>http://i.imgur.com/iflMUSW.jpg</fanart>
 </dir>
 
 <dir>
 <title>[COLOR red]Boxing[/COLOR] [COLOR white]On YouTube[/COLOR]</title>
-<link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/youtube.xml</link>
+<link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/Boxing/youtube.xml</link>
 <thumbnail>http://i.imgur.com/I5Va65B.jpg</thumbnail>
 <fanart>http://i.imgur.com/V4Gz7SU.jpg</fanart>
 </dir>
 
 <dir>
 <title>[COLOR red]Boxing[/COLOR] [COLOR white]Rivalries[/COLOR]</title>
-<link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/rivalries/rivalries_main.xml</link>
+<link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/Boxing/rivalries/rivalries_main.xml</link>
 <thumbnail>http://i.imgur.com/3esBBeq.jpg</thumbnail>
 <fanart>http://i.imgur.com/eA2uwK7.jpg</fanart>
 </dir>

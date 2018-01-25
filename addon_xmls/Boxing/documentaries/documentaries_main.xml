@@ -80,7 +80,7 @@
 
 <dir>
 	<name>[COLOR white]Beyond the Glory Documentaries[/COLOR]</name>
-	<link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/documentaries/beyond_the_glory.xml</link>
+	<link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/Boxing/documentaries/beyond_the_glory.xml</link>
 	<thumbnail>http://i.imgur.com/VpFNsNs.jpg</thumbnail>
 	<fanart>http://i.imgur.com/NcUtU4G.jpg</fanart>
 </dir>
@@ -236,7 +236,7 @@
 
 <dir>
 	<title>[COLOR white]Legendary Nights Documentaries[/COLOR]</title>
-	<link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/documentaries/legendary_nights.xml</link>
+	<link>https://raw.githubusercontent.com/Shepo6/Shepo/master/addon_xmls/Boxing/documentaries/legendary_nights.xml</link>
 	<thumbnail>http://i.imgur.com/acCvbVL.jpg</thumbnail>
 	<fanart>http://i.imgur.com/NcUtU4G.jpg</fanart>
 </dir>
