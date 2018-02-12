@@ -50,31 +50,6 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.bob.unleashed" name="BoB Unleashed" version="1.0.13" provider-name="midraal">
-    <requires>
-        <import addon="xbmc.python" version="2.19.0" />
-        <import addon="script.module.nanscrapers" version="0.5.5" />
-        <import addon="script.module.python.koding.aio" version="0.9.6.6" />
-        <import addon="script.module.beautifulsoup" version="3.2.1" />
-        <import addon="script.module.requests" version="2.9.1" />
-        <import addon="script.module.addon.common" version="2.0.0" />
-        <import addon="script.module.xmltodict" version="0.9.0" />
-        <!--<import addon="script.module.web-pdb" version="1.0"/>-->
-        <import addon="script.module.urlresolver" version="1.2.0" />
-    </requires>
-    <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>audio video</provides>
-    </extension>
-    <extension point="xbmc.service" library="service.py" start="[login|startup]" />
-    <extension point="xbmc.addon.metadata">
-        <summary lang="en">Bob's little sister</summary>
-        <description lang="en">Bob's little sister</description>
-        <platform>all</platform>
-        <website>www.noobsandnerds.com</website>
-        <video_guide>xtOqLY5PJDY</video_guide>
-    </extension>
-</addon>
-
 <addon id="plugin.video.littlerascals"
 	name="Little Rascals"
 	version="0.0.5"
@@ -96,13 +71,27 @@
   </extension>
 </addon>
 
-<addon id="repository.Shepo" name="Shepo Repo" version="0.0.8" provider-name="Shepo">
+<addon id="repository.Shepo" name="Shepo Repo" version="0.0.9" provider-name="Shepo">
+	<requires>
+		<import addon="xbmc.addon" version="12.0.0"/>
+    </requires>
 	<extension point="xbmc.addon.repository" name="Shepo Repo">
+	<dir>
 		<info compressed="false">https://raw.github.com/Shepo6/Shepo/master/addons.xml</info>
 		<checksum>https://raw.github.com/Shepo6/Shepo/master/addons.xml.md5</checksum>
 		<datadir zip="true">https://raw.github.com/Shepo6/Shepo/master/</datadir>
+	</dir>
+	<dir>
+		<info compressed="false">https://github.com/tvaddonsco/tva-resolvers-repo/raw/master/addons.xml</info>
+		<checksum>https://github.com/tvaddonsco/tva-resolvers-repo/raw/master/addons.xml.md5</checksum>
+		<datadir zip="true">https://github.com/tvaddonsco/tva-resolvers-repo/raw/master/zips/</datadir>
+	</dir>
+	<dir>
+		<info compressed="false">https://raw.githubusercontent.com/noobsandnerds/modules4all/master/zips/addons.xml</info>
+		<checksum>https://raw.githubusercontent.com/noobsandnerds/modules4all/master/zips/addons.xml.md5</checksum>
+		<datadir zip="true">https://raw.githubusercontent.com/noobsandnerds/modules4all/master/zips/</datadir>
+	</dir>
 	</extension>
-
 	<extension point="xbmc.addon.metadata">
 		<summary>Shepo Repository</summary>
 		<description>Home of the Shepo Wizard</description>
