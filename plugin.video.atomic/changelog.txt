@@ -1,0 +1,11 @@
+v1.0
+created Atomic using the Jen template
+added xmls.
+
+v0.1
+based on bob
+Added "plugin" system, see plugin.py
+Added most strings to strings.po
+Added hebrew translation (thanks Eng2Heb)
+Added Search and Search db generation script
+Loads of bugfixes
