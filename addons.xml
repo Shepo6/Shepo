@@ -71,7 +71,7 @@
   </extension>
 </addon>
 
-<addon id="repository.Shepo" name="Shepo Repo" version="1.0.0" provider-name="Shepo">
+<addon id="repository.Shepo" name="Shepo Repo" version="0.0.8" provider-name="Shepo">
 	<requires>
 		<import addon="xbmc.addon" version="12.0.0"/>
     </requires>
