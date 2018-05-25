@@ -50,7 +50,7 @@
     </extension>
 </addon>
 
-<addon id="repository.Shepo" name="Shepo Repo" version="1.0.0" provider-name="Shepo">
+<addon id="repository.Shepo" name="Shepo Repo" version="1.0.1" provider-name="Shepo">
 	<requires>
 		<import addon="xbmc.addon" version="12.0.0"/>
     </requires>
@@ -61,19 +61,34 @@
 		<datadir zip="true">https://raw.github.com/Shepo6/Shepo/master/</datadir>
 	</dir>
 	<dir>
-		<info compressed="false">https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/addons.xml</info>
-		<checksum>https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/addons.xml.md5</checksum>
-		<datadir zip="true">https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/</datadir>
+            <info compressed="false">https://raw.githubusercontent.com/marcelveldt/repository.marcelveldt/master/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/marcelveldt/repository.marcelveldt/master/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/marcelveldt/repository.marcelveldt/master/</datadir>
+    </dir>
+	<dir>
+		<info compressed="false">https://github.com/tvaddonsco/tva-resolvers-repo/raw/master/addons.xml</info>
+		<checksum>https://github.com/tvaddonsco/tva-resolvers-repo/raw/master/addons.xml.md5</checksum>
+		<datadir zip="true">https://github.com/tvaddonsco/tva-resolvers-repo/raw/master/zips/</datadir>
 	</dir>
 	<dir>
-		<info compressed="false">https://raw.githubusercontent.com/jsergio123/zips/master/addons.xml</info>
-		<checksum>https://raw.githubusercontent.com/jsergio123/zips/master/addons.xml.md5</checksum>
-		<datadir zip="true">https://raw.githubusercontent.com/jsergio123/zips/master/</datadir>
+			<info compressed="false">https://raw.githubusercontent.com/jsergio123/zips/master/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/jsergio123/zips/master/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/jsergio123/zips/master/</datadir>
+    </dir>
+	<dir>
+			<info compressed="false">https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/</datadir>
+    </dir>
+	<dir>
+		<info compressed="false">https://raw.githubusercontent.com/teamuniversal/scrapers/master/_modules4all/zips/addons.xml</info>
+		<checksum>https://raw.githubusercontent.com/teamuniversal/scrapers/master/_modules4all/zips/addons.xml.md5</checksum>
+		<datadir zip="true">https://raw.githubusercontent.com/teamuniversal/scrapers/master/_modules4all/zips/</datadir>
 	</dir>
 	</extension>
 	<extension point="xbmc.addon.metadata">
 		<summary>Shepo Repository</summary>
-		<description>Home of the Shepo Wizard</description>
+		<description>Home of Everything Shepo</description>
 		<platform>all</platform>
 	</extension>
 </addon>
