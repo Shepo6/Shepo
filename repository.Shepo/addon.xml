@@ -19,11 +19,6 @@
 		<checksum>https://raw.githubusercontent.com/jsergio123/zips/master/addons.xml.md5</checksum>
 		<datadir zip="true">https://raw.githubusercontent.com/jsergio123/zips/master/</datadir>
 	</dir>
-	<dir>
-  		<info compressed="false">http://teamuniversal.xyz/modules4all/addons.xml</info>
-  		<checksum>http://teamuniversal.xyz/modules4all/addons.xml.md5</checksum>
-  		<datadir zip="true">http://teamuniversal.xyz/modules4all/</datadir>
- 	</dir>
 	</extension>
 	<extension point="xbmc.addon.metadata">
 		<summary>Shepo Repository</summary>
