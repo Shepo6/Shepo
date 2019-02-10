@@ -1,11 +1,22 @@
 import os, xbmc, xbmcaddon
 
 #########################################################
+### Global Variables ####################################
+#########################################################
+PATH           = xbmcaddon.Addon().getAddonInfo('path')
+ART            = os.path.join(PATH, 'resources', 'art')
+#########################################################
+
+#########################################################
 ### User Edit Variables #################################
 #########################################################
 ADDON_ID       = xbmcaddon.Addon().getAddonInfo('id')
 ADDONTITLE     = 'Shepo Wizard'
+BUILDERNAME    = 'Shepo'
 EXCLUDES       = [ADDON_ID]
+# Enable/Disable the text file caching with 'Yes' or 'No' and age being how often it rechecks in minutes
+CACHETEXT      = 'Yes'
+CACHEAGE       = 30
 # Text File with build info in it.
 BUILDFILE      = 'https://archive.org/download/ShepoWizard/ShepoWizard.txt'
 # How often you would list it to check for build updates in days
@@ -20,13 +31,10 @@ YOUTUBEFILE    = 'http://'
 ADDONFILE      = 'http://'
 # Text File for advanced settings.  Leave as 'http://' to ignore
 ADVANCEDFILE   = 'http://'
-
-# Dont need to edit just here for icons stored locally
-PATH           = xbmcaddon.Addon().getAddonInfo('path')
-ART            = os.path.join(PATH, 'resources', 'art')
+#########################################################
 
 #########################################################
-### THEMING MENU ITEMS ##################################
+### Theming Menu Items ##################################
 #########################################################
 # If you want to use locally stored icons the place them in the Resources/Art/
 # folder of the wizard then use os.path.join(ART, 'imagename.png')
@@ -36,6 +44,7 @@ ART            = os.path.join(PATH, 'resources', 'art')
 # Leave as http:// for default icon
 ICONBUILDS     = os.path.join(ART, 'icon.png')
 ICONMAINT      = os.path.join(ART, 'icon.png')
+ICONSPEED      = os.path.join(ART, 'icon.png')
 ICONAPK        = os.path.join(ART, 'icon.png')
 ICONADDONS     = 'http://'
 ICONYOUTUBE    = 'http://'
@@ -45,7 +54,7 @@ ICONREAL       = 'http://'
 ICONLOGIN      = 'http://'
 ICONCONTACT    = os.path.join(ART, 'icon.png')
 ICONSETTINGS   = os.path.join(ART, 'icon.png')
-# Hide the ====== seperators 'Yes' or 'No'
+# Hide the section seperators 'Yes' or 'No'
 HIDESPACERS    = 'No'
 # Character used in seperator
 SPACER         = '='
@@ -76,8 +85,9 @@ CONTACTFANART  = 'http://'
 #########################################################
 
 #########################################################
-### AUTO UPDATE #########################################
-########## FOR THOSE WITH NO REPO #######################
+### Auto Update                   #######################
+###        For Those With No Repo #######################
+#########################################################
 # Enable Auto Update 'Yes' or 'No'
 AUTOUPDATE     = 'No'
 # Url to wizard version
@@ -85,8 +95,9 @@ WIZARDFILE     = ''
 #########################################################
 
 #########################################################
-### AUTO INSTALL ########################################
-########## REPO IF NOT INSTALLED ########################
+### Auto Install                 ########################
+###        Repo If Not Installed ########################
+#########################################################
 # Enable Auto Install 'Yes' or 'No'
 AUTOINSTALL    = 'Yes'
 # Addon ID for the repository
@@ -98,7 +109,7 @@ REPOZIPURL     = 'https://raw.githubusercontent.com/Shepo6/Shepo/master/reposito
 #########################################################
 
 #########################################################
-### NOTIFICATION WINDOW##################################
+### Notification Window #################################
 #########################################################
 # Enable Notification screen Yes or No
 ENABLE         = 'Yes'
@@ -106,9 +117,12 @@ ENABLE         = 'Yes'
 NOTIFICATION   = 'https://archive.org/download/ShepoWizard/ShepoWizardNotification.txt'
 # Use either 'Text' or 'Image'
 HEADERTYPE     = 'Text'
+# Font size of header
+FONTHEADER     = 'Font14'
 HEADERMESSAGE  = 'Welcome To The Shepo Wizard'
 # url to image if using Image 424x180
 HEADERIMAGE    = ''
+FONTSETTINGS   = 'Font13'
 # Background for Notification Window
 BACKGROUND     = 'https://archive.org/download/fanart_20160727_1808/extra%20images/NotificationBackground.jpg'
 #########################################################
